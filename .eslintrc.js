@@ -37,6 +37,7 @@ module.exports = {
     "import/prefer-default-export": 0,
     "import/no-unresolved": "error",
     "import/no-extraneous-dependencies": 0,
+    "import/no-named-as-default": ["off"],
     //
 
     "no-use-before-define": ["off"],
