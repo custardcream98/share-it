@@ -7,12 +7,13 @@ import styled from "styled-components";
 import { Helmet } from "react-helmet-async";
 
 import Navbar from "components/Navbar";
-import Home from "./Home";
-import Profile from "./Profile";
+import HomePage from "./Home";
+import ProfilePage from "./Profile";
 import { navbarHeight } from "styles/styleConstants";
+import PostNewPage from "./Post/New";
 
 const Main = styled.main`
-  margin-top: ${navbarHeight};
+  margin-top: calc(${navbarHeight} + 10px);
   flex-grow: 1;
 `;
 const Footer = styled.footer``;
@@ -31,8 +32,14 @@ const AppRouter = ({ isLoggedIn }: Props) => {
         <Navbar />
         <Main>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="profile"
+              element={<ProfilePage />}
+            />
+            <Route path="post">
+              <Route path="new" element={<PostNewPage />} />
+            </Route>
           </Routes>
         </Main>
         <Footer>footer</Footer>

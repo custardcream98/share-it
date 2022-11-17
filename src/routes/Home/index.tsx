@@ -1,8 +1,13 @@
+import { Link } from "react-router-dom";
+
+import EditPage from "routes/Post/New";
 import MarkdownRenderer from "components/common/MarkdownRenderer";
 
-const Home = () => {
+const HomePage = () => {
   return (
-    <MarkdownRenderer>{`A paragraph with *emphasis* and **strong importance**.
+    <>
+      <Link to={"/post/new"}>글 작성하기</Link>
+      {/* <MarkdownRenderer>{`A paragraph with *emphasis* and **strong importance**.
 
 > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
 
@@ -54,8 +59,9 @@ root.render(
 1. ㅇㄹㄴㅁㄹ
 2. ㅇㅁㄴㄹㅁㄴㅇㄹ
 3. ㅇㄴㅁㄹㅇㄴㄹ
-`}</MarkdownRenderer>
+`}</MarkdownRenderer> */}
+    </>
   );
 };
 
-export default Home;
+export default HomePage;
