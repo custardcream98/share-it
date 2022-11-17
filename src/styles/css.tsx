@@ -1,27 +1,6 @@
 import { css } from "styled-components";
 import { maxWidth } from "./styleConstants";
 
-export const cssCustomReset = css`
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  input,
-  button {
-    padding: 0;
-    border: none;
-    background: none;
-    font-size: inherit;
-    font: inherit;
-  }
-  button {
-    cursor: pointer;
-  }
-  button:disabled {
-    cursor: initial;
-  }
-`;
-
 export const cssSrOnly = css`
   overflow: hidden;
   position: absolute;

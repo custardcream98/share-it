@@ -7,12 +7,31 @@ import reset from "styled-reset";
 import { HelmetProvider } from "react-helmet-async";
 
 import AppRouter from "routes";
-import { cssCustomReset, cssMaxWidth } from "styles/css";
+import { cssMaxWidth } from "styles/css";
 import { lightTheme } from "styles/theme";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  ${cssCustomReset}
+
+  /* 커스텀 리셋 */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  input,
+  button {
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: inherit;
+    font: inherit;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: initial;
+  }
   
   body {
     font-family: "Pretendard";

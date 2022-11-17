@@ -14,8 +14,10 @@ const Header = styled.header`
 
   height: ${navbarHeight};
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(1rem);
+  backdrop-filter: blur(13px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  z-index: 100;
 `;
 
 const GlobalNavbar = styled.nav`

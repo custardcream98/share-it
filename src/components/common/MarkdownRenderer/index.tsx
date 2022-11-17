@@ -152,7 +152,7 @@ const StyledMarkdown = styled(ReactMarkdown)`
   }
 
   ol > li::before {
-    content: counters(item, ".") " ";
+    content: counters(item, ".") ".";
     font-weight: 500;
     margin: 0 0.4rem 0.2rem 0.3rem;
     counter-increment: item;
@@ -163,29 +163,14 @@ const StyledMarkdown = styled(ReactMarkdown)`
   }
 
   em {
-    font-family: "Nanum Myeongjo", serif;
     font-style: italic;
-    letter-spacing: -0.05rem;
-  }
-
-  iframe {
-    border: 2px solid ${(props) => props.theme.textColor};
-    border-radius: 10px;
-    margin: 0 auto;
-  }
-
-  p[class="iframe-container"] {
-    width: 100%;
-    overflow: auto;
   }
 
   table {
     margin: auto;
     max-width: 600px;
-    border-top: 1px solid
-      ${(props) => props.theme.textColor};
-    border-bottom: 1px solid
-      ${(props) => props.theme.textColor};
+    border-top: 1px solid rgb(203, 155, 34);
+    border-bottom: 1px solid rgb(203, 155, 34);
     th,
     td {
       padding: 0.2rem 3rem;
@@ -194,8 +179,8 @@ const StyledMarkdown = styled(ReactMarkdown)`
       }
     }
     thead {
-      background-color: #9b9b9b6f;
-      font-weight: 700;
+      background-color: #ffd45290;
+      font-weight: 500;
       th {
         text-align: center;
       }
