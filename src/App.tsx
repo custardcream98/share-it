@@ -2,11 +2,12 @@ import styled, {
   createGlobalStyle,
   ThemeProvider,
 } from "styled-components";
+// eslint-disable-next-line
 import reset from "styled-reset";
 import { HelmetProvider } from "react-helmet-async";
 
 import AppRouter from "routes";
-import { cssCustomReset } from "styles/css";
+import { cssCustomReset, cssMaxWidth } from "styles/css";
 import { lightTheme } from "styles/theme";
 
 const GlobalStyle = createGlobalStyle`
@@ -22,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
+  ${cssMaxWidth}
   display: flex;
   min-height: 100vh;
   flex-direction: column;
