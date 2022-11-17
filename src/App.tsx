@@ -1,9 +1,11 @@
-import AppRouter from "routes";
 import styled, {
   createGlobalStyle,
   ThemeProvider,
 } from "styled-components";
 import reset from "styled-reset";
+import { HelmetProvider } from "react-helmet-async";
+
+import AppRouter from "routes";
 import { cssCustomReset } from "styles/css";
 import { lightTheme } from "styles/theme";
 
@@ -27,14 +29,14 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    <>
+    <HelmetProvider>
       <GlobalStyle />
       <ThemeProvider theme={lightTheme}>
         <Wrapper>
           <AppRouter isLoggedIn={true} />
         </Wrapper>
       </ThemeProvider>
-    </>
+    </HelmetProvider>
   );
 }
 
