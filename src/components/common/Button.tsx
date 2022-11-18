@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export default styled.button`
+  display: inline-block;
+
   color: #fff;
   background-color: ${(props) => props.theme.accentColor};
 

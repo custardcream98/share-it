@@ -9,8 +9,8 @@ import {
   COLLECTION_NAME,
   fireAuth,
   firestore,
-  Profile,
 } from "configs/firebase.config";
+import { Profile } from "interfaces";
 
 const createProfileIfUserIsNew = async (user: User) => {
   const profileDocRef = doc(

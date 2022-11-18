@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fireAuth } from "configs/firebase.config";
 import GithubLogoImg from "imgs/Github-logo.svg";
 import { ROUTE_PATH } from "configs/router.config";
-import { loginGithubUser } from "lib/firebase/login";
+import { loginGithubUser } from "utils/firebase/login";
 
 const ButtonGithubLogin = styled.button`
   padding: 10px;

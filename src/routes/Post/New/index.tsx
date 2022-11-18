@@ -4,20 +4,22 @@ import {
   useEffect,
   useRef,
   FormEvent,
+  Dispatch,
+  SetStateAction,
 } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import MarkdownRenderer from "components/common/MarkdownRenderer";
-import FoldedHandsEmojiImg from "imgs/folded-hands.png";
-import WinkEmojiImg from "imgs/wink.png";
 import StyledLink from "components/common/StyledLink";
 import textareaDefalutDescription from "./textareaDefalutDescription";
 import { navbarHeight } from "styles/styleConstants";
-import createPost from "lib/firebase/createPost";
-import { Post } from "configs/firebase.config";
+import createPost from "utils/firebase/createPost";
 import { ROUTE_PATH } from "configs/router.config";
 import useCreateContentMetaData from "hooks/useCreateContentMetaData";
+import { Post } from "interfaces";
+import { categories } from "configs/firebase.config";
+import { cssCategoryBadgeNotColored } from "styles/css";
 
 const TextEditorWrapper = styled.div`
   margin-top: 10px;
@@ -33,7 +35,7 @@ const StyledRenderer = styled(MarkdownRenderer)`
 
 const cssInputBorder = css`
   border-radius: 10px;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid ${(props) => props.theme.borderColor};
 `;
 
 const TextareaEditor = styled.textarea`
@@ -67,7 +69,7 @@ const InputTitleWrapper = styled.div`
   display: flex;
 `;
 
-const RadioWrapper = styled.div`
+const CheckboxWrapper = styled.div`
   margin: 15px 0 15px auto;
   width: fit-content;
 
@@ -84,21 +86,63 @@ const RadioWrapper = styled.div`
     background-color: ${(props) => props.theme.accentColor};
     color: #fff;
   }
-
-  .lab-request-review {
-    background: url(${FoldedHandsEmojiImg}) no-repeat 6px
-      center/18px 18px;
-  }
-  .lab-provide-help {
-    background: url(${WinkEmojiImg}) no-repeat 6px
-      center/18px 18px;
-  }
 `;
+
+const CheckboxLabel = styled.label`
+  ${cssCategoryBadgeNotColored}
+  transition: ease 0.15s;
+`;
+
+const CheckboxCategory = ({
+  categoryKey,
+  setCategoriesChecked,
+}: {
+  categoryKey: string;
+  setCategoriesChecked: Dispatch<SetStateAction<string[]>>;
+}) => {
+  const checkboxRef = useRef<HTMLInputElement>(null);
+  const [categoryString, iconUrl] = categories[categoryKey];
+
+  const onCheckboxChange = () => {
+    if (checkboxRef.current?.checked) {
+      setCategoriesChecked((prev) => [
+        categoryKey,
+        ...prev,
+      ]);
+    } else {
+      setCategoriesChecked((prev) =>
+        prev.filter((key) => key !== categoryKey)
+      );
+    }
+  };
+
+  return (
+    <>
+      <input
+        className="sr-only"
+        type="checkbox"
+        ref={checkboxRef}
+        value={categoryKey}
+        id={categoryKey}
+        onChange={onCheckboxChange}
+      />
+      <CheckboxLabel
+        htmlFor={categoryKey}
+        iconUrl={iconUrl}
+      >
+        {categoryString}
+      </CheckboxLabel>
+    </>
+  );
+};
 
 const PostNewPage = () => {
   const navigate = useNavigate();
 
   const contentMetaData = useCreateContentMetaData();
+
+  const [categoriesChecked, setCategoriesChecked] =
+    useState<string[]>([]);
 
   const [content, setContent] = useState(
     textareaDefalutDescription
@@ -106,11 +150,6 @@ const PostNewPage = () => {
   const textareaEditorRef =
     useRef<HTMLTextAreaElement>(null);
   const inputTitleRef = useRef<HTMLInputElement>(null);
-
-  const [
-    isRequestReviewChecked,
-    setIsRequestReviewChecked,
-  ] = useState(false);
 
   const onEditorChange = (
     event: ChangeEvent<HTMLTextAreaElement>
@@ -127,6 +166,7 @@ const PostNewPage = () => {
     if (
       !contentMetaData ||
       !inputTitleRef.current ||
+      !inputTitleRef.current.value ||
       !textareaEditorRef.current
     ) {
       return;
@@ -134,10 +174,9 @@ const PostNewPage = () => {
 
     const postData: Post = {
       title: inputTitleRef.current.value,
-      category: [
-        isRequestReviewChecked ? "리뷰요청" : "참고",
-      ],
+      category: categoriesChecked,
       likes: [],
+      comments: [],
       content: textareaEditorRef.current.value,
       ...contentMetaData,
     };
@@ -166,40 +205,20 @@ const PostNewPage = () => {
           id="title"
           ref={inputTitleRef}
           type="text"
-          min="1"
           placeholder="제목을 입력해주세요."
+          required
         />
         <StyledLink as="button">글 올리기</StyledLink>
       </InputTitleWrapper>
-      <RadioWrapper>
-        <input
-          className="sr-only"
-          type="radio"
-          name="postType"
-          id="request-review"
-          onChange={() => setIsRequestReviewChecked(true)}
-        />
-        <label
-          className="lab-request-review"
-          htmlFor="request-review"
-        >
-          리뷰해주세요
-        </label>
-        <input
-          className="sr-only"
-          type="radio"
-          name="postType"
-          id="provide-help"
-          checked
-          onChange={() => setIsRequestReviewChecked(false)}
-        />
-        <label
-          className="lab-provide-help"
-          htmlFor="provide-help"
-        >
-          참고하세요
-        </label>
-      </RadioWrapper>
+      <CheckboxWrapper>
+        {Object.keys(categories).map((categoryKey) => (
+          <CheckboxCategory
+            key={categoryKey}
+            categoryKey={categoryKey}
+            setCategoriesChecked={setCategoriesChecked}
+          />
+        ))}
+      </CheckboxWrapper>
       <TextEditorWrapper>
         <label className="sr-only" htmlFor="editor">
           내용 입력란

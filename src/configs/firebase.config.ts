@@ -2,6 +2,9 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
+import FoldedHandsEmojiImg from "imgs/folded-hands.png";
+import WinkEmojiImg from "imgs/wink.png";
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -22,39 +25,9 @@ export enum COLLECTION_NAME {
   PROFILE = "profile",
 }
 
-type Uid = string;
-type Timestamp = number;
-type URL = string;
-type Username = string;
-
-type PostId = string;
-type CommentId = string;
-
-export interface ContentMetaData {
-  createdAt: Timestamp;
-  editedAt: Timestamp;
-  uid: Uid;
-  profilePhotoURL: URL;
-  username: Username;
-}
-export interface Likes {
-  [uid: string]: number;
-}
-export interface Post extends ContentMetaData {
-  title: string;
-  category: string[];
-  likes: Username[];
-  content: string;
-}
-export interface Comment extends ContentMetaData {
-  content: string;
-  subcommentTo: CommentId;
-}
-export interface PostComment {
-  [postId: PostId]: Comment[];
-}
-export interface Profile {
-  posts: PostId[];
-  comments: { postId: PostId; commentId: CommentId }[];
-  likes: PostId[];
-}
+export const categories: {
+  [key: string]: [name: string, iconUrl: string];
+} = {
+  rv: ["리뷰해주세요", FoldedHandsEmojiImg],
+  ad: ["참고하세요", WinkEmojiImg],
+};

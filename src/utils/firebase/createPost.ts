@@ -1,17 +1,9 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc } from "firebase/firestore";
 
-import {
-  COLLECTION_NAME,
-  firestore,
-  Post,
-} from "configs/firebase.config";
+import { postCollectionRef } from "./references";
+import { Post } from "interfaces";
 
 export default async (postData: Post) => {
-  const postCollectionRef = collection(
-    firestore,
-    COLLECTION_NAME.POSTS
-  );
-
   try {
     return await addDoc(postCollectionRef, postData);
   } catch (error) {

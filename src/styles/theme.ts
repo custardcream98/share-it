@@ -3,5 +3,6 @@ import { DefaultTheme } from "styled-components";
 export const lightTheme: DefaultTheme = {
   textColor: "black",
   bgColor: "white",
-  accentColor: "orange",
+  accentColor: "#FFA500",
+  borderColor: "rgb(204, 204, 204)",
 };

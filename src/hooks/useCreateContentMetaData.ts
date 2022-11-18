@@ -1,4 +1,4 @@
-import { ContentMetaData } from "configs/firebase.config";
+import { ContentMetaData } from "interfaces";
 import useAuth from "./useAuth";
 
 /**

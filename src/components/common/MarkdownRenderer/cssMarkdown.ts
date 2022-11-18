@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { linkStyle } from "../StyledLink";
+import { cssLinkStyle } from "styles/css";
 
 export default css`
   --main-font-size: 1.1rem;
@@ -18,7 +18,7 @@ export default css`
   transition: linear 0.3s;
 
   a {
-    ${linkStyle}
+    ${cssLinkStyle}
   }
 
   b,
