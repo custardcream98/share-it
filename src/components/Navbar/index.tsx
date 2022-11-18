@@ -3,6 +3,7 @@ import { cssMaxWidth } from "styles/css";
 import StyledLink from "components/common/StyledLink";
 import Logo from "components/common/Logo";
 import { navbarHeight } from "styles/styleConstants";
+import useAuth from "hooks/useAuth";
 
 const Header = styled.header`
   display: flex;
@@ -29,13 +30,18 @@ const GlobalNavbar = styled.nav`
 `;
 
 const Navbar = () => {
+  const auth = useAuth();
+
   return (
     <Header>
       <GlobalNavbar>
         <Logo />
         <ul>
-          <StyledLink to={"/profile"}>프로필</StyledLink>
-          <StyledLink to={"/auth"}>로그인</StyledLink>
+          {auth ? (
+            <StyledLink to={"/profile"}>프로필</StyledLink>
+          ) : (
+            <StyledLink to={"/auth"}>로그인</StyledLink>
+          )}
         </ul>
       </GlobalNavbar>
     </Header>
