@@ -11,6 +11,7 @@
       "title": "제목, string",
       "category": ["카테고리, string"],
       "likes": ["좋아요를 누른 사람의 uid, string"],
+      "content": "포스트 내용, string",
       "createdAt": "글이 작성된 시점, number(timestamp)",
       "editedAt": "글이 수정된 시점, number(timestamp)",
       "uid": "글을 작성한 작성자의 uid",

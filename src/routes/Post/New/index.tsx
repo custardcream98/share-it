@@ -5,6 +5,7 @@ import {
   useRef,
   FormEvent,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import MarkdownRenderer from "components/common/MarkdownRenderer";
@@ -13,6 +14,10 @@ import WinkEmojiImg from "imgs/wink.png";
 import StyledLink from "components/common/StyledLink";
 import textareaDefalutDescription from "./textareaDefalutDescription";
 import { navbarHeight } from "styles/styleConstants";
+import createPost from "lib/firebase/createPost";
+import { Post } from "configs/firebase.config";
+import { ROUTE_PATH } from "configs/router.config";
+import useCreateContentMetaData from "hooks/useCreateContentMetaData";
 
 const TextEditorWrapper = styled.div`
   margin-top: 10px;
@@ -72,6 +77,8 @@ const RadioWrapper = styled.div`
     margin-left: 10px;
     border-radius: 10px;
     transition: ease 0.15s;
+
+    cursor: pointer;
   }
   input:checked + label {
     background-color: ${(props) => props.theme.accentColor};
@@ -89,6 +96,10 @@ const RadioWrapper = styled.div`
 `;
 
 const PostNewPage = () => {
+  const navigate = useNavigate();
+
+  const contentMetaData = useCreateContentMetaData();
+
   const [content, setContent] = useState(
     textareaDefalutDescription
   );
@@ -107,11 +118,35 @@ const PostNewPage = () => {
     setContent(event.target.value);
   };
 
-  const onFormSubmit = (
+  const onFormSubmit = async (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
     event.stopPropagation();
+
+    if (
+      !contentMetaData ||
+      !inputTitleRef.current ||
+      !textareaEditorRef.current
+    ) {
+      return;
+    }
+
+    const postData: Post = {
+      title: inputTitleRef.current.value,
+      category: [
+        isRequestReviewChecked ? "리뷰요청" : "참고",
+      ],
+      likes: [],
+      content: textareaEditorRef.current.value,
+      ...contentMetaData,
+    };
+
+    const result = await createPost(postData);
+
+    if (result) {
+      navigate(ROUTE_PATH.HOME);
+    }
   };
 
   useEffect(() => {

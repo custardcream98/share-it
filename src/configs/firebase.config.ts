@@ -30,27 +30,25 @@ type Username = string;
 type PostId = string;
 type CommentId = string;
 
+export interface ContentMetaData {
+  createdAt: Timestamp;
+  editedAt: Timestamp;
+  uid: Uid;
+  profilePhotoURL: URL;
+  username: Username;
+}
 export interface Likes {
   [uid: string]: number;
 }
-export interface Post {
+export interface Post extends ContentMetaData {
   title: string;
   category: string[];
   likes: Username[];
-  createdAt: Timestamp;
-  editedAt: Timestamp;
-  uid: Uid;
-  profilePhotoURL: URL;
-  username: Username;
+  content: string;
 }
-export interface Comment {
+export interface Comment extends ContentMetaData {
   content: string;
   subcommentTo: CommentId;
-  createdAt: Timestamp;
-  editedAt: Timestamp;
-  uid: Uid;
-  profilePhotoURL: URL;
-  username: Username;
 }
 export interface PostComment {
   [postId: PostId]: Comment[];
