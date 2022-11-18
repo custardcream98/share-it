@@ -60,9 +60,3 @@ export interface Profile {
   comments: { postId: PostId; commentId: CommentId }[];
   likes: PostId[];
 }
-
-export const newUserProfile: Profile = {
-  posts: [],
-  comments: [],
-  likes: [],
-};

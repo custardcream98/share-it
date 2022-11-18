@@ -1,19 +1,10 @@
-import {
-  GithubAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { setDoc, doc, getDoc } from "firebase/firestore";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import {
-  COLLECTION_NAME,
-  fireAuth,
-  firestore,
-  newUserProfile,
-} from "configs/firebase.config";
+import { fireAuth } from "configs/firebase.config";
 import GithubLogoImg from "imgs/Github-logo.svg";
 import { ROUTE_PATH } from "configs/router.config";
+import { loginGithubUser } from "lib/firebase/login";
 
 const ButtonGithubLogin = styled.button`
   padding: 10px;
@@ -30,35 +21,7 @@ const LoginPage = () => {
 
   const onGithubLoginClick = async () => {
     if (!fireAuth.currentUser) {
-      const ghProvider = new GithubAuthProvider();
-      try {
-        const { user: createdUser } = await signInWithPopup(
-          fireAuth,
-          ghProvider
-        );
-
-        const profileDocRef = doc(
-          firestore,
-          COLLECTION_NAME.PROFILE,
-          createdUser.uid
-        );
-
-        const profileSnap = await getDoc(profileDocRef);
-
-        if (!profileSnap.exists()) {
-          await setDoc(
-            doc(
-              firestore,
-              COLLECTION_NAME.PROFILE,
-              createdUser.uid
-            ),
-            newUserProfile
-          );
-        }
-      } catch (error) {
-        console.log(error);
-        return;
-      }
+      await loginGithubUser();
     }
 
     if (fireAuth.currentUser) {
