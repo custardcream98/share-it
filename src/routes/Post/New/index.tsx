@@ -1,4 +1,3 @@
-import MarkdownRenderer from "components/common/MarkdownRenderer";
 import {
   useState,
   ChangeEvent,
@@ -7,12 +6,13 @@ import {
   FormEvent,
 } from "react";
 import styled, { css } from "styled-components";
-import { navbarHeight } from "styles/styleConstants";
-import textareaDefalutDescription from "./textareaDefalutDescription";
 
+import MarkdownRenderer from "components/common/MarkdownRenderer";
 import FoldedHandsEmojiImg from "imgs/folded-hands.png";
 import WinkEmojiImg from "imgs/wink.png";
 import StyledLink from "components/common/StyledLink";
+import textareaDefalutDescription from "./textareaDefalutDescription";
+import { navbarHeight } from "styles/styleConstants";
 
 const TextEditorWrapper = styled.div`
   margin-top: 10px;

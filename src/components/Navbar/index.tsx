@@ -35,6 +35,7 @@ const Navbar = () => {
         <Logo />
         <ul>
           <StyledLink to={"/profile"}>프로필</StyledLink>
+          <StyledLink to={"/auth"}>로그인</StyledLink>
         </ul>
       </GlobalNavbar>
     </Header>

@@ -66,7 +66,7 @@ function App() {
       <GlobalStyle />
       <ThemeProvider theme={lightTheme}>
         <Wrapper>
-          <AppRouter isLoggedIn={true} />
+          <AppRouter />
         </Wrapper>
       </ThemeProvider>
     </HelmetProvider>
