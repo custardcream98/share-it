@@ -7,7 +7,7 @@ const LogoutButton = () => {
   const navigate = useNavigate();
   const onLogoutClick = async () => {
     await fireAuth.signOut();
-    navigate(ROUTE_PATH.HOME);
+    navigate(ROUTE_PATH.HOME, { replace: true });
   };
   return <Button onClick={onLogoutClick}>로그아웃</Button>;
 };

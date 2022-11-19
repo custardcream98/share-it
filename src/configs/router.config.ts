@@ -4,4 +4,5 @@ export enum ROUTE_PATH {
   POST = "post",
   NEWPOST = "new",
   AUTH = "auth",
+  EDIT = "edit",
 }
