@@ -2,6 +2,8 @@
 
 특정 과제, 문제에 대해 자기가 작성한 코드를 나누는 웹사이트
 
+[배포 URL](https://share-it-rust.vercel.app/)
+
 # NoSQL DB Scheme
 
 ```json
