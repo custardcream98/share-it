@@ -29,9 +29,7 @@ const AppRouter = () => {
     <>
       <Router>
         <Helmet>
-          <title>
-            Share it! : 멋사 FE 3기의 코드나누기
-          </title>
+          <title>Share it!: 멋사 FE 3기의 코드나누기</title>
         </Helmet>
         <Navbar />
         <Main>
@@ -45,7 +43,7 @@ const AppRouter = () => {
               element={
                 <CheckAuth>
                   <Helmet>
-                    <title>Share it! : 프로필</title>
+                    <title>Share it!: 프로필</title>
                   </Helmet>
                   <ProfilePage />
                 </CheckAuth>
@@ -57,7 +55,7 @@ const AppRouter = () => {
                 element={
                   <CheckAuth>
                     <Helmet>
-                      <title>Share it! : 포스트 작성</title>
+                      <title>Share it!: 포스트 작성</title>
                     </Helmet>
                     <PostNewPage />
                   </CheckAuth>
@@ -81,7 +79,7 @@ const AppRouter = () => {
               element={
                 <>
                   <Helmet>
-                    <title>Share it! : 로그인</title>
+                    <title>Share it!: 로그인</title>
                   </Helmet>
                   <LoginPage />
                 </>

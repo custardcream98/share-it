@@ -21,7 +21,7 @@ const PostByPostIdPage = () => {
   return (
     <>
       <Helmet>
-        <title>Share it! : {postData.title}</title>
+        <title>Share it!: {postData.title}</title>
       </Helmet>
       <section>
         <PostTitle
