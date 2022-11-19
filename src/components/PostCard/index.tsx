@@ -4,12 +4,12 @@ import styled from "styled-components";
 import { PostWithPostId } from "interfaces";
 import { ROUTE_PATH } from "configs/router.config";
 
-import CategoryBadge from "components/common/CategoryBadge";
 import Username from "components/common/Username";
 import Counter from "components/common/Counter";
+import CategoryBadges from "components/common/CategoryBadges";
 
 type PostCardLinkProps = {
-  isLast: boolean;
+  islast: boolean;
 };
 
 const PostCardLink = styled(Link)<PostCardLinkProps>`
@@ -23,7 +23,7 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
     ${(props) => props.theme.borderColor};
 
   ${(props) =>
-    props.isLast
+    props.islast
       ? `border-bottom: 1px solid ${props.theme.borderColor};`
       : ""}
 
@@ -41,20 +41,16 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
   }
 `;
 
-const CategoryBadgeWrapper = styled.ul`
-  display: inline-block;
-`;
-
 type Props = {
   post: PostWithPostId;
-  isLast: boolean;
+  islast: boolean;
 };
 
-const PostCard = ({ post, isLast }: Props) => {
+const PostCard = ({ post, islast }: Props) => {
   return (
     <PostCardLink
       to={`${ROUTE_PATH.POST}/${post.postId}`}
-      isLast={isLast}
+      islast={islast}
     >
       <div>
         <strong className="title">{post.title}</strong>
@@ -62,17 +58,16 @@ const PostCard = ({ post, isLast }: Props) => {
           username={post.username}
           profilePhotoURL={post.profilePhotoURL}
         />
-        <CategoryBadgeWrapper>
-          {post.category.map((cate) => (
-            <CategoryBadge
-              key={post.uid + post.createdAt + cate}
-              categoryKey={cate}
-            />
-          ))}
-        </CategoryBadgeWrapper>
+        {post.category.length !== 0 && (
+          <CategoryBadges
+            categories={post.category}
+            postId={post.postId}
+          />
+        )}
       </div>
       <Counter
         createdAt={post.createdAt}
+        editedAt={post.editedAt}
         likes={post.likes}
         commentsCount={post.comments.length}
       />

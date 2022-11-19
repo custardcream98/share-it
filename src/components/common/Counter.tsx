@@ -58,6 +58,7 @@ const CounterWrapper = styled.div<CounterStyleProps>`
 
 type Props = {
   createdAt: number;
+  editedAt: number;
   likes: string[];
   commentsCount: number;
   isLikeClickable?: boolean;
@@ -66,6 +67,7 @@ type Props = {
 
 const Counter = ({
   createdAt,
+  editedAt,
   likes,
   commentsCount,
   isLikeClickable = false,
@@ -91,6 +93,9 @@ const Counter = ({
     }
   };
 
+  const lastEdited =
+    createdAt === editedAt ? createdAt : editedAt;
+
   return (
     <CounterWrapper
       isLikeClickable={isLikeClickable}
@@ -98,9 +103,10 @@ const Counter = ({
     >
       <time
         className="date"
-        dateTime={new Date(createdAt).toISOString()}
+        dateTime={new Date(lastEdited).toISOString()}
       >
-        {getDateStringFromTimestamp(createdAt)}
+        {getDateStringFromTimestamp(lastEdited) +
+          (lastEdited !== createdAt ? " (수정됨)" : "")}
       </time>
       {isLikeClickable ? (
         <button

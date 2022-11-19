@@ -8,6 +8,8 @@ const Wrapper = styled.span<WrapperProps>`
   display: inline-flex;
   align-items: center;
 
+  height: 34px;
+  margin-top: 10px;
   margin-right: 10px;
   font-size: 0.95rem;
 

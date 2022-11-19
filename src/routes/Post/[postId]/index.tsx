@@ -26,7 +26,9 @@ const PostByPostIdPage = () => {
           title={postData.title}
           username={postData.username}
           createdAt={postData.createdAt}
+          editedAt={postData.editedAt}
           profilePhotoURL={postData.profilePhotoURL}
+          categories={postData.category}
           commentsCount={postData.comments.length}
           likes={postData.comments}
           postId={postId}

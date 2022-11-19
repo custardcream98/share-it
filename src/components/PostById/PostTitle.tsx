@@ -11,6 +11,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { ROUTE_PATH } from "configs/router.config";
+import CategoryBadges from "components/common/CategoryBadges";
 
 const Wrapper = styled.header`
   margin: 20px 0;
@@ -43,8 +44,10 @@ const PostInfoWrapper = styled.div`
 type Props = {
   title: string;
   createdAt: number;
+  editedAt: number;
   username: string;
   profilePhotoURL: string;
+  categories: string[];
   commentsCount: number;
   likes: string[];
   postId: string;
@@ -54,8 +57,10 @@ type Props = {
 const PostTitle = ({
   title,
   createdAt,
+  editedAt,
   username,
   profilePhotoURL,
+  categories,
   commentsCount,
   likes,
   postId,
@@ -113,12 +118,19 @@ const PostTitle = ({
         )}
       </TitleWrapper>
       <PostInfoWrapper>
-        <Username
-          username={username}
-          profilePhotoURL={profilePhotoURL}
-        />
+        <div>
+          <Username
+            username={username}
+            profilePhotoURL={profilePhotoURL}
+          />
+          <CategoryBadges
+            categories={categories}
+            postId={postId}
+          />
+        </div>
         <Counter
           createdAt={createdAt}
+          editedAt={editedAt}
           commentsCount={commentsCount}
           likes={likes}
           isLikeClickable={true}
