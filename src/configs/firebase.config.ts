@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 
 import FoldedHandsEmojiImg from "imgs/folded-hands.png";
 import WinkEmojiImg from "imgs/wink.png";
+import PersonRaisingHandImg from "imgs/person-raising-hand.png";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -31,4 +32,5 @@ export const categories: {
 } = {
   rv: ["리뷰해주세요", FoldedHandsEmojiImg],
   ad: ["참고하세요", WinkEmojiImg],
+  qu: ["질문있어요", PersonRaisingHandImg],
 };
