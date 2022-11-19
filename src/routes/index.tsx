@@ -17,12 +17,12 @@ import LoginPage from "./Auth";
 import CheckAuth from "routes/CheckAuth";
 import PostByPostIdPage from "./Post/[postId]";
 import PostEditPage from "./Post/Edit";
+import Footer from "components/Footer";
 
 const Main = styled.main`
   margin-top: calc(${navbarHeight} + 10px);
   flex-grow: 1;
 `;
-const Footer = styled.footer``;
 
 const AppRouter = () => {
   return (
@@ -93,7 +93,7 @@ const AppRouter = () => {
             />
           </Routes>
         </Main>
-        <Footer>footer</Footer>
+        <Footer />
       </Router>
     </>
   );
