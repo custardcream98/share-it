@@ -107,7 +107,6 @@ const CheckboxCategory = ({
 }) => {
   const checkboxRef = useRef<HTMLInputElement>(null);
   const [categoryString, iconUrl] = categories[categoryKey];
-  console.log(categoryKey, initialState);
 
   const onCheckboxChange = () => {
     if (checkboxRef.current?.checked) {

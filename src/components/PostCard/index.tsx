@@ -9,7 +9,7 @@ import Counter from "components/common/Counter";
 import CategoryBadges from "components/common/CategoryBadges";
 
 type PostCardLinkProps = {
-  islast: boolean;
+  isLastCard: boolean;
 };
 
 const PostCardLink = styled(Link)<PostCardLinkProps>`
@@ -23,7 +23,7 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
     ${(props) => props.theme.borderColor};
 
   ${(props) =>
-    props.islast
+    props.isLastCard
       ? `border-bottom: 1px solid ${props.theme.borderColor};`
       : ""}
 
@@ -43,14 +43,14 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
 
 type Props = {
   post: PostWithPostId;
-  islast: boolean;
+  isLastCard: boolean;
 };
 
-const PostCard = ({ post, islast }: Props) => {
+const PostCard = ({ post, isLastCard }: Props) => {
   return (
     <PostCardLink
       to={`${ROUTE_PATH.POST}/${post.postId}`}
-      islast={islast}
+      isLastCard={isLastCard}
     >
       <div>
         <strong className="title">{post.title}</strong>

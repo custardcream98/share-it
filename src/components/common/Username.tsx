@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-type WrapperProps = {
+type UsernameStyledProps = {
   profilePhotoURL: string;
 };
-const Wrapper = styled.span<WrapperProps>`
+const UsernameStyled = styled.span<UsernameStyledProps>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -37,9 +37,9 @@ type Props = {
 
 const Username = ({ username, profilePhotoURL }: Props) => {
   return (
-    <Wrapper profilePhotoURL={profilePhotoURL}>
+    <UsernameStyled profilePhotoURL={profilePhotoURL}>
       {username}
-    </Wrapper>
+    </UsernameStyled>
   );
 };
 

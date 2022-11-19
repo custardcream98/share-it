@@ -4,6 +4,8 @@ import StyledLink from "components/common/StyledLink";
 import Logo from "components/common/Logo";
 import { navbarHeight } from "styles/styleConstants";
 import useAuth from "hooks/useAuth";
+import { Link } from "react-router-dom";
+import { ROUTE_PATH } from "configs/router.config";
 
 const Header = styled.header`
   display: flex;
@@ -19,6 +21,14 @@ const Header = styled.header`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   z-index: 100;
+`;
+
+const ProfilePhoto = styled.img`
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+  border: 2px solid ${(props) => props.theme.borderColor};
 `;
 
 const GlobalNavbar = styled.nav`
@@ -38,9 +48,17 @@ const Navbar = () => {
         <Logo />
         <ul>
           {auth ? (
-            <StyledLink to={"/profile"}>프로필</StyledLink>
+            <Link to={ROUTE_PATH.PROFILE}>
+              <ProfilePhoto
+                // eslint-disable-next-line
+                src={auth.currentUser!.photoURL!}
+                alt="프로필"
+              />
+            </Link>
           ) : (
-            <StyledLink to={"/auth"}>로그인</StyledLink>
+            <StyledLink to={ROUTE_PATH.AUTH}>
+              로그인
+            </StyledLink>
           )}
         </ul>
       </GlobalNavbar>

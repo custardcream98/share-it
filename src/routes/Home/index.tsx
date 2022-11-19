@@ -50,7 +50,7 @@ const HomePage = () => {
               <li key={post.uid + post.createdAt}>
                 <PostCard
                   post={post}
-                  islast={i === posts.length - 1}
+                  isLastCard={i === posts.length - 1}
                 />
               </li>
             ))}
