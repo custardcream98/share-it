@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default styled.button`
+const Button = styled.button`
   display: inline-block;
 
   color: #fff;
@@ -14,4 +14,14 @@ export default styled.button`
   :hover {
     scale: 1.1;
   }
+`;
+
+export default Button;
+
+type Props = {
+  isDisabled: boolean;
+};
+export const ButtonForDisableable = styled(Button)<Props>`
+  ${({ isDisabled }) =>
+    isDisabled && "pointer-events: none;"}
 `;

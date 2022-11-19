@@ -30,6 +30,7 @@ const CounterWrapper = styled.div<CounterStyleProps>`
   .date {
     display: block;
     font-size: 0.8rem;
+    white-space: nowrap;
   }
 
   .like-count,

@@ -1,36 +1,59 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const LoadingIndicator = styled.div`
+type LoadingIndicatorStyleProps = {
+  isForSmall: boolean;
+};
+const cssLoadingIndicatorCoverPage = css`
   position: absolute;
   left: 50vw;
   top: 50vh;
 
-  transform: translate(-50%, -50%);
-
   width: 80px;
   height: 80px;
 
-  :after {
-    content: " ";
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border-radius: 50%;
-    border: 6px solid ${({ theme }) => theme.borderColor};
-    border-color: ${({ theme }) => theme.borderColor}
-      transparent ${({ theme }) => theme.borderColor}
-      transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
-  }
+  border: 6px solid;
+  border-color: ${({ theme }) => theme.borderColor}
+    transparent ${({ theme }) => theme.borderColor}
+    transparent;
+`;
+const cssLoadingIndicatorSmall = css`
+  width: 25px;
+  height: 25px;
+  border: 3px solid;
+  border-color: #fff transparent #fff transparent;
+
+  margin: -5px 10px;
+`;
+const LoadingIndicatorStyle = styled.div<LoadingIndicatorStyleProps>`
+  margin: 8px;
+  border-radius: 50%;
+
+  animation: lds-dual-ring 1.2s linear infinite;
+
+  ${({ isForSmall }) =>
+    isForSmall
+      ? cssLoadingIndicatorSmall
+      : cssLoadingIndicatorCoverPage}
+
   @keyframes lds-dual-ring {
     0% {
-      transform: rotate(0deg);
+      transform: ${({ isForSmall }) =>
+          isForSmall ? "" : "translate(-50%, -50%)"}
+        rotate(0deg);
     }
     100% {
-      transform: rotate(360deg);
+      transform: ${({ isForSmall }) =>
+          isForSmall ? "" : "translate(-50%, -50%)"}
+        rotate(360deg);
     }
   }
 `;
+
+type Props = {
+  isForSmall?: boolean;
+};
+const LoadingIndicator = ({ isForSmall }: Props) => (
+  <LoadingIndicatorStyle isForSmall={isForSmall ?? false} />
+);
 
 export default LoadingIndicator;

@@ -23,7 +23,7 @@ import {
 } from "utils/firebase/posts";
 import textareaDefalutDescription from "./textareaDefalutDescription";
 import LoadingIndicator from "../LoadingIndicator";
-import Button from "../Button";
+import { ButtonForDisableable } from "../Button";
 
 const TextEditorWrapper = styled.div`
   margin-top: 10px;
@@ -186,7 +186,8 @@ const PostEditor = ({ initialPostData }: Props) => {
     if (
       !contentMetaData ||
       !inputTitleRef.current ||
-      !inputTitleRef.current.value
+      !inputTitleRef.current.value ||
+      isSubmitOngoing
     ) {
       return;
     }
@@ -237,15 +238,15 @@ const PostEditor = ({ initialPostData }: Props) => {
           placeholder="제목을 입력해주세요."
           required
         />
-        <Button>
+        <ButtonForDisableable isDisabled={isSubmitOngoing}>
           {isSubmitOngoing ? (
-            <LoadingIndicator />
+            <LoadingIndicator isForSmall={true} />
           ) : "글" + initialPostData ? (
             "수정하기"
           ) : (
             "올리기"
           )}
-        </Button>
+        </ButtonForDisableable>
       </InputTitleWrapper>
       <CheckboxWrapper>
         {Object.keys(categories).map((categoryKey) => (
