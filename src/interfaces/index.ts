@@ -29,7 +29,10 @@ export interface PostWithPostId extends Post {
 export interface Comment extends ContentMetaData {
   postId: PostId;
   content: string;
-  subcommentTo: CommentId;
+  subcommentTo?: CommentId;
+}
+export interface CommentWithCommentId extends Comment {
+  commentId: string;
 }
 
 export interface Profile {

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
-import ThumbsUpIconImg from "imgs/thumbs-up-icon.svg";
-import ThumbsUpIconActivatedImg from "imgs/thumbs-up-activated-icon.svg";
-import CommentIconImg from "imgs/comment-icon.svg";
-import getDateStringFromTimestamp from "utils/getDateStringFromTimestamp";
 import { toggleLike } from "utils/firebase/likes";
 import useCurrentUser from "hooks/useCurrentUser";
+
+import ThumbsUpImg from "imgs/thumbs-up.png";
+import SpeechBalloonImg from "imgs/speech-balloon.png";
 
 type CounterStyleProps = {
   isLikeClickable: boolean;
@@ -25,41 +24,29 @@ const cssLikeClickable = css<CounterStyleProps>`
 `;
 
 const CounterWrapper = styled.div<CounterStyleProps>`
-  text-align: right;
-
-  .date {
-    display: block;
-    font-size: 0.8rem;
-    white-space: nowrap;
-  }
-
   .like-count,
   .comment-count {
     width: fit-content;
     display: inline-block;
-    margin-top: 7px;
-    padding-left: 15px;
-    font-size: 0.9rem;
+    padding-left: 25px;
+    font-size: 1rem;
+    height: 20px;
+    line-height: 20px;
   }
   .like-count {
-    background: ${({ isLikeActive }) =>
-        isLikeActive
-          ? `url(${ThumbsUpIconActivatedImg})`
-          : `url(${ThumbsUpIconImg})`}
-      no-repeat left center/13px;
+    background: url(${ThumbsUpImg}) no-repeat left
+      center/20px;
     ${({ isLikeClickable }) =>
       isLikeClickable && cssLikeClickable};
   }
   .comment-count {
-    margin-left: 15px;
-    background: url(${CommentIconImg}) no-repeat left
-      center/13px;
+    margin-left: 18px;
+    background: url(${SpeechBalloonImg}) no-repeat left
+      center/20px;
   }
 `;
 
 type Props = {
-  createdAt: number;
-  editedAt: number;
   likes: string[];
   commentsCount: number;
   isLikeClickable?: boolean;
@@ -67,8 +54,6 @@ type Props = {
 };
 
 const Counter = ({
-  createdAt,
-  editedAt,
   likes,
   commentsCount,
   isLikeClickable = false,
@@ -94,21 +79,11 @@ const Counter = ({
     }
   };
 
-  const lastEdited =
-    createdAt === editedAt ? createdAt : editedAt;
-
   return (
     <CounterWrapper
       isLikeClickable={isLikeClickable}
       isLikeActive={likesState.includes(uid ?? "")}
     >
-      <time
-        className="date"
-        dateTime={new Date(lastEdited).toISOString()}
-      >
-        {getDateStringFromTimestamp(lastEdited) +
-          (lastEdited !== createdAt ? " (수정됨)" : "")}
-      </time>
       {isLikeClickable ? (
         <button
           type="button"

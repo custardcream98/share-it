@@ -5,6 +5,7 @@ import usePostData from "hooks/usePostData";
 import MarkdownRenderer from "components/common/MarkdownRenderer";
 import PostTitle from "components/PostById/PostTitle";
 import LoadingIndicator from "components/common/LoadingIndicator";
+import PostComments from "components/PostById/PostComments";
 
 const PostByPostIdPage = () => {
   const { postId } = useParams();
@@ -31,7 +32,7 @@ const PostByPostIdPage = () => {
           profilePhotoURL={postData.profilePhotoURL}
           categories={postData.category}
           commentsCount={postData.comments.length}
-          likes={postData.comments}
+          likes={postData.likes}
           postId={postId}
           authorUid={postData.uid}
         />
@@ -39,7 +40,7 @@ const PostByPostIdPage = () => {
           {postData.content}
         </MarkdownRenderer>
       </section>
-      <section></section>
+      <PostComments postId={postId} />
     </>
   );
 };

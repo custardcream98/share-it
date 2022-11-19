@@ -11,7 +11,7 @@ import {
   getProfileDocRef,
   postCollectionRef,
 } from "./references";
-import { Post, PostWithPostId } from "interfaces";
+import { Post } from "interfaces";
 
 export const createPost = async (postData: Post) => {
   try {

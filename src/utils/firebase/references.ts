@@ -11,6 +11,11 @@ export const postCollectionRef = collection(
   COLLECTION_NAME.POSTS
 );
 
+export const commentCollectionRef = collection(
+  firestore,
+  COLLECTION_NAME.COMMENTS
+);
+
 export const getProfileDocRef = () => {
   const { uid } = useCurrentUser(true);
 

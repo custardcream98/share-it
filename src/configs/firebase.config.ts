@@ -23,6 +23,7 @@ export const fireAuth = getAuth();
 export enum COLLECTION_NAME {
   POSTS = "posts",
   PROFILE = "profile",
+  COMMENTS = "comments",
 }
 
 export const categories: {

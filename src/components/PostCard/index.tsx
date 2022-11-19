@@ -19,8 +19,7 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
 
   padding: 20px;
 
-  border-top: 1px solid
-    ${(props) => props.theme.borderColor};
+  border-top: 1px solid ${({ theme }) => theme.borderColor};
 
   ${(props) =>
     props.isLastCard

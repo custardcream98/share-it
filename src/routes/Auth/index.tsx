@@ -1,12 +1,11 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { fireAuth } from "configs/firebase.config";
 import GithubLogoImg from "imgs/Github-logo.svg";
 import { ROUTE_PATH } from "configs/router.config";
 import { loginGithubUser } from "utils/firebase/login";
-import useCurrentUser from "hooks/useCurrentUser";
-import { useEffect } from "react";
+import useAuth from "hooks/useAuth";
 
 const ButtonGithubLogin = styled.button`
   padding: 10px;
@@ -20,20 +19,20 @@ const ButtonGithubLogin = styled.button`
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const currentUser = useCurrentUser(false);
+  const auth = useAuth();
 
   useEffect(() => {
-    if (currentUser) {
+    if (auth) {
       navigate(ROUTE_PATH.HOME, { replace: true });
     }
-  }, []);
+  }, [auth]);
 
   const onGithubLoginClick = async () => {
-    if (!fireAuth.currentUser) {
+    if (!auth) {
       await loginGithubUser();
     }
 
-    if (fireAuth.currentUser) {
+    if (auth) {
       navigate(ROUTE_PATH.HOME, { replace: true });
     }
   };

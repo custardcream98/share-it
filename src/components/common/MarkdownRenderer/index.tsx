@@ -13,11 +13,13 @@ const StyledMarkdown = styled(ReactMarkdown)`
 type Props = {
   children: string;
   className?: string;
+  isForComment?: boolean;
 };
 
 const MarkdownRenderer = ({
   children,
   className,
+  isForComment = false,
 }: Props) => {
   return (
     <StyledMarkdown
@@ -32,6 +34,7 @@ const MarkdownRenderer = ({
         h5: headingRenderer,
         h6: headingRenderer,
       }}
+      isForComment={isForComment}
     >
       {children}
     </StyledMarkdown>
