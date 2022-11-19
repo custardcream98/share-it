@@ -5,7 +5,7 @@ import { postCollectionRef } from "utils/firebase/references";
 import { Post, PostWithPostId } from "interfaces";
 
 export default () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<PostWithPostId[]>();
 
   useEffect(() => {
     return onSnapshot(postCollectionRef, (snapshot) => {
