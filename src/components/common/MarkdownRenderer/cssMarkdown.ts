@@ -66,7 +66,6 @@ export default css`
     margin: var(--main-heading-margin) 0 1rem 0;
     padding-bottom: 0.1em;
     font-size: calc(var(--main-font-size) * 2);
-    border-bottom: 2px solid #b3b3b3;
   }
   .strong-h2 {
     margin-top: calc(var(--main-heading-margin) * 0.7);
