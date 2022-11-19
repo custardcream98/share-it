@@ -15,6 +15,8 @@ import PostNewPage from "./Post/New";
 import { ROUTE_PATH } from "configs/router.config";
 import LoginPage from "./Auth";
 import CheckAuth from "routes/CheckAuth";
+import PostByPostIdPage from "./Post/[postId]";
+import PostEditPage from "./Post/Edit";
 
 const Main = styled.main`
   margin-top: calc(${navbarHeight} + 10px);
@@ -60,6 +62,18 @@ const AppRouter = () => {
                     <PostNewPage />
                   </CheckAuth>
                 }
+              />
+              <Route
+                path={ROUTE_PATH.EDIT}
+                element={
+                  <CheckAuth>
+                    <PostEditPage />
+                  </CheckAuth>
+                }
+              />
+              <Route
+                path=":postId"
+                element={<PostByPostIdPage />}
               />
             </Route>
             <Route
