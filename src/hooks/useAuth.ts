@@ -9,6 +9,7 @@ export default () => {
     const unsubscribeAuthStateListner =
       fireAuth.onAuthStateChanged((user) => {
         if (user) setAuth(fireAuth);
+        else setAuth(null);
       });
 
     if (fireAuth.currentUser) {
