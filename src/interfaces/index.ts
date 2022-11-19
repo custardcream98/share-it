@@ -35,6 +35,6 @@ export interface PostComment {
 }
 export interface Profile {
   posts: PostId[];
-  comments: { postId: PostId; commentId: CommentId }[];
+  comments: PostId[];
   likes: PostId[];
 }

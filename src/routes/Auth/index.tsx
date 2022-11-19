@@ -5,6 +5,7 @@ import { fireAuth } from "configs/firebase.config";
 import GithubLogoImg from "imgs/Github-logo.svg";
 import { ROUTE_PATH } from "configs/router.config";
 import { loginGithubUser } from "utils/firebase/login";
+import useCurrentUser from "hooks/useCurrentUser";
 
 const ButtonGithubLogin = styled.button`
   padding: 10px;
@@ -18,6 +19,11 @@ const ButtonGithubLogin = styled.button`
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const currentUser = useCurrentUser(false);
+
+  if (currentUser) {
+    navigate(ROUTE_PATH.HOME, { replace: true });
+  }
 
   const onGithubLoginClick = async () => {
     if (!fireAuth.currentUser) {
