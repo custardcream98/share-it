@@ -63,33 +63,33 @@ export default css`
   }
 
   .strong-h1 {
-    margin: var(--main-heading-margin) 0 1rem 0;
-    padding-bottom: 0.1em;
+    margin-top: var(--main-heading-margin);
+    padding-bottom: 0.2em;
     font-size: calc(var(--main-font-size) * 2);
   }
   .strong-h2 {
     margin-top: calc(var(--main-heading-margin) * 0.7);
-    padding-bottom: 0.1em;
+    padding-bottom: 0.2em;
     font-size: calc(var(--main-font-size) * 1.6);
   }
   .strong-h3 {
     margin-top: calc(var(--main-heading-margin) * 0.5);
-    padding-bottom: 0.1em;
+    padding-bottom: 0.2em;
     font-size: calc(var(--main-font-size) * 1.3);
   }
   .strong-h4 {
     margin-top: calc(var(--main-heading-margin) * 0.5);
-    padding-bottom: 0.1em;
+    padding-bottom: 0.2em;
     font-size: calc(var(--main-font-size) * 1.15);
   }
   .strong-h5 {
     margin-top: calc(var(--main-heading-margin) * 0.5);
-    padding-bottom: 0.1em;
+    padding-bottom: 0.2em;
     font-size: calc(var(--main-font-size) * 1.12);
   }
   .strong-h6 {
     margin-top: calc(var(--main-heading-margin) * 0.5);
-    padding-bottom: 0.1em;
+    padding-bottom: 0.2em;
     font-size: calc(var(--main-font-size) * 1.1);
   }
 
