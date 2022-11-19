@@ -36,6 +36,8 @@ export default (postId: string | undefined) => {
         setPostData(loadedDocData);
       } catch (error) {
         console.log(error);
+        alert("포스트를 찾을 수 없습니다.");
+        navigate(ROUTE_PATH.HOME, { replace: true });
       }
     })();
   }, []);
