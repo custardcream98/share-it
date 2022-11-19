@@ -32,6 +32,12 @@ const GlobalStyle = createGlobalStyle`
   button:disabled {
     cursor: initial;
   }
+  input::placeholder,
+  textarea::placeholder {
+    font-size: inherit;
+    font-family: inherit;
+  }
+  
 
   /* 접근성 관련 */
   .sr-only {
