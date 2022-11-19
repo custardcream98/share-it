@@ -1,34 +1,37 @@
 import { MouseEvent } from "react";
 import styled from "styled-components";
+import {
+  generatePath,
+  useNavigate,
+} from "react-router-dom";
 
 import Button from "components/common/Button";
 import Counter from "components/common/Counter";
 import Username from "components/common/Username";
 import useCurrentUser from "hooks/useCurrentUser";
 import { deletePost } from "utils/firebase/posts";
-import {
-  generatePath,
-  useNavigate,
-} from "react-router-dom";
 import { ROUTE_PATH } from "configs/router.config";
 import CategoryBadges from "components/common/CategoryBadges";
 
 const Wrapper = styled.header`
+  position: relative;
   margin: 20px 0;
-  padding-bottom: 25px;
+  padding-bottom: 10px;
   border-bottom: 2px solid
     ${(props) => props.theme.borderColor};
 `;
 
-const TitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+const EditButtonsWrapper = styled.div`
+  position: absolute;
+
+  right: 0;
+  top: -20px;
 `;
 
 const Title = styled.h2`
   font-size: 2.2rem;
   font-weight: 700;
+  margin-bottom: 20px;
 `;
 
 const ButtonEditPost = styled(Button)`
@@ -38,7 +41,7 @@ const ButtonEditPost = styled(Button)`
 const PostInfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 type Props = {
@@ -96,32 +99,14 @@ const PostTitle = ({
 
   return (
     <Wrapper>
-      <TitleWrapper>
-        <Title>{title}</Title>
-        {uid === authorUid && (
-          <div>
-            <ButtonEditPost
-              type="button"
-              name="delete"
-              onClick={onEditPostClick}
-            >
-              삭제하기
-            </ButtonEditPost>
-            <ButtonEditPost
-              type="button"
-              name="edit"
-              onClick={onEditPostClick}
-            >
-              수정하기
-            </ButtonEditPost>
-          </div>
-        )}
-      </TitleWrapper>
+      <Title>{title}</Title>
       <PostInfoWrapper>
         <div>
           <Username
             username={username}
             profilePhotoURL={profilePhotoURL}
+            createdAt={createdAt}
+            editedAt={editedAt}
           />
           <CategoryBadges
             categories={categories}
@@ -129,14 +114,30 @@ const PostTitle = ({
           />
         </div>
         <Counter
-          createdAt={createdAt}
-          editedAt={editedAt}
           commentsCount={commentsCount}
           likes={likes}
           isLikeClickable={true}
           postId={postId}
         />
       </PostInfoWrapper>
+      {uid === authorUid && (
+        <EditButtonsWrapper>
+          <ButtonEditPost
+            type="button"
+            name="delete"
+            onClick={onEditPostClick}
+          >
+            삭제하기
+          </ButtonEditPost>
+          <ButtonEditPost
+            type="button"
+            name="edit"
+            onClick={onEditPostClick}
+          >
+            수정하기
+          </ButtonEditPost>
+        </EditButtonsWrapper>
+      )}
     </Wrapper>
   );
 };

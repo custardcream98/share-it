@@ -33,6 +33,7 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
     display: block;
     font-weight: 600;
     font-size: 1.2rem;
+    margin-bottom: 10px;
   }
 
   :hover {
@@ -57,6 +58,8 @@ const PostCard = ({ post, isLastCard }: Props) => {
         <Username
           username={post.username}
           profilePhotoURL={post.profilePhotoURL}
+          createdAt={post.createdAt}
+          editedAt={post.editedAt}
         />
         {post.category.length !== 0 && (
           <CategoryBadges
@@ -66,8 +69,6 @@ const PostCard = ({ post, isLastCard }: Props) => {
         )}
       </div>
       <Counter
-        createdAt={post.createdAt}
-        editedAt={post.editedAt}
         likes={post.likes}
         commentsCount={post.comments.length}
       />

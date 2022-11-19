@@ -1,15 +1,16 @@
 import styled from "styled-components";
+import TimeIndicator from "./TimeIndicator";
 
 type UsernameStyledProps = {
   profilePhotoURL: string;
 };
 const UsernameStyled = styled.span<UsernameStyledProps>`
   position: relative;
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   height: 34px;
-  margin-top: 10px;
   margin-right: 10px;
   font-size: 0.95rem;
 
@@ -33,12 +34,25 @@ const UsernameStyled = styled.span<UsernameStyledProps>`
 type Props = {
   username: string;
   profilePhotoURL: string;
+  createdAt?: number;
+  editedAt?: number;
 };
 
-const Username = ({ username, profilePhotoURL }: Props) => {
+const Username = ({
+  username,
+  profilePhotoURL,
+  createdAt,
+  editedAt,
+}: Props) => {
   return (
     <UsernameStyled profilePhotoURL={profilePhotoURL}>
       {username}
+      {createdAt && editedAt && (
+        <TimeIndicator
+          createdAt={createdAt}
+          editedAt={editedAt}
+        />
+      )}
     </UsernameStyled>
   );
 };
