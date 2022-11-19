@@ -22,17 +22,21 @@ export default (postId: string | undefined) => {
     }
 
     (async () => {
-      const postDocRef = doc(
-        firestore,
-        COLLECTION_NAME.POSTS,
-        postId
-      );
-      const postDataSnap = await getDoc(postDocRef);
+      try {
+        const postDocRef = doc(
+          firestore,
+          COLLECTION_NAME.POSTS,
+          postId
+        );
+        const postDataSnap = await getDoc(postDocRef);
 
-      const loadedDocData =
-        postDataSnap.data() as unknown as Post;
+        const loadedDocData =
+          postDataSnap.data() as unknown as Post;
 
-      setPostData(loadedDocData);
+        setPostData(loadedDocData);
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, []);
 

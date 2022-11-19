@@ -27,12 +27,11 @@ export interface PostWithPostId extends Post {
   postId: string;
 }
 export interface Comment extends ContentMetaData {
+  postId: PostId;
   content: string;
   subcommentTo: CommentId;
 }
-export interface PostComment {
-  [postId: PostId]: Comment[];
-}
+
 export interface Profile {
   posts: PostId[];
   comments: PostId[];
