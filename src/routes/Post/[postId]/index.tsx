@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import usePostData from "hooks/usePostData";
 import MarkdownRenderer from "components/common/MarkdownRenderer";
 import PostTitle from "components/PostById/PostTitle";
+import LoadingIndicator from "components/common/LoadingIndicator";
 
 const PostByPostIdPage = () => {
   const { postId } = useParams();
@@ -13,7 +14,7 @@ const PostByPostIdPage = () => {
     throw Error("잘못된 접근입니다.");
   }
   if (!postData) {
-    return <div>로딩중</div>;
+    return <LoadingIndicator />;
   }
 
   return (
@@ -38,6 +39,7 @@ const PostByPostIdPage = () => {
           {postData.content}
         </MarkdownRenderer>
       </section>
+      <section></section>
     </>
   );
 };

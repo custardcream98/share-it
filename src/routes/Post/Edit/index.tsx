@@ -1,3 +1,4 @@
+import LoadingIndicator from "components/common/LoadingIndicator";
 import PostEditor from "components/common/PostEditor";
 import { ROUTE_PATH } from "configs/router.config";
 import useCurrentUser from "hooks/useCurrentUser";
@@ -30,7 +31,7 @@ const PostEditPage = () => {
   }, [postData]);
 
   if (!postData) {
-    return <div>로딩중</div>;
+    return <LoadingIndicator />;
   }
 
   return (

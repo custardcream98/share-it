@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import MarkdownRenderer from "components/common/MarkdownRenderer";
-import StyledLink from "components/common/StyledLink";
 import { navbarHeight } from "styles/styleConstants";
 import { ROUTE_PATH } from "configs/router.config";
 import useCreateContentMetaData from "hooks/useCreateContentMetaData";
@@ -23,6 +22,8 @@ import {
   updatePost,
 } from "utils/firebase/posts";
 import textareaDefalutDescription from "./textareaDefalutDescription";
+import LoadingIndicator from "../LoadingIndicator";
+import Button from "../Button";
 
 const TextEditorWrapper = styled.div`
   margin-top: 10px;
@@ -73,8 +74,12 @@ const InputTitleWrapper = styled.div`
 `;
 
 const CheckboxWrapper = styled.div`
-  margin: 15px 0 15px auto;
-  width: fit-content;
+  margin: 15px 0;
+  text-align: right;
+  padding-bottom: 13px;
+
+  border-bottom: 2px solid
+    ${({ theme }) => theme.borderColor};
 
   label {
     padding: 5px;
@@ -161,6 +166,8 @@ const PostEditor = ({ initialPostData }: Props) => {
   const [content, setContent] = useState(
     initialPostData?.content ?? textareaDefalutDescription
   );
+  const [isSubmitOngoing, setIsSubmitOngoing] =
+    useState(false);
 
   const inputTitleRef = useRef<HTMLInputElement>(null);
 
@@ -183,6 +190,8 @@ const PostEditor = ({ initialPostData }: Props) => {
     ) {
       return;
     }
+
+    setIsSubmitOngoing(true);
 
     let result;
     if (!initialPostData) {
@@ -228,9 +237,15 @@ const PostEditor = ({ initialPostData }: Props) => {
           placeholder="제목을 입력해주세요."
           required
         />
-        <StyledLink as="button">
-          글 {initialPostData ? "수정하기" : "올리기"}
-        </StyledLink>
+        <Button>
+          {isSubmitOngoing ? (
+            <LoadingIndicator />
+          ) : "글" + initialPostData ? (
+            "수정하기"
+          ) : (
+            "올리기"
+          )}
+        </Button>
       </InputTitleWrapper>
       <CheckboxWrapper>
         {Object.keys(categories).map((categoryKey) => (

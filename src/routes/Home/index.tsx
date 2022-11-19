@@ -7,6 +7,7 @@ import usePostsSnapshot from "hooks/usePostsSnapshot";
 import Button from "components/common/Button";
 import Pagination from "components/common/Pagination";
 import PostCard from "components/PostCard";
+import LoadingIndicator from "components/common/LoadingIndicator";
 
 const ButtonCreatePost = styled(Button)`
   display: block;
@@ -31,7 +32,7 @@ const HomePage = () => {
   const posts = usePostsSnapshot();
 
   if (!posts) {
-    return <div>로딩중</div>;
+    return <LoadingIndicator />;
   }
 
   return (
