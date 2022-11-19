@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import ThumbsUpIconImg from "imgs/thumbs-up-icon.svg";
-import CommentIconImg from "imgs/comment-icon.svg";
-import { ROUTE_PATH } from "configs/router.config";
-import getDateStringFromTimestamp from "utils/getDateStringFromTimestamp";
-import CategoryBadge from "components/common/CategoryBadge";
 import { PostWithPostId } from "interfaces";
+import { ROUTE_PATH } from "configs/router.config";
+
+import CategoryBadge from "components/common/CategoryBadge";
 import Username from "components/common/Username";
+import Counter from "components/common/Counter";
 
 type PostCardLinkProps = {
   isLast: boolean;
@@ -45,32 +44,6 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
 const CategoryBadgeWrapper = styled.ul`
   display: inline-block;
 `;
-const PostCardInfoWrapper = styled.div`
-  text-align: right;
-
-  .date {
-    display: block;
-    font-size: 0.8rem;
-  }
-
-  .like-count,
-  .comment-count {
-    width: fit-content;
-    display: inline-block;
-    margin-top: 7px;
-    padding-left: 15px;
-    font-size: 0.9rem;
-  }
-  .like-count {
-    background: url(${ThumbsUpIconImg}) no-repeat left
-      center/13px;
-  }
-  .comment-count {
-    margin-left: 15px;
-    background: url(${CommentIconImg}) no-repeat left
-      center/13px;
-  }
-`;
 
 type Props = {
   post: PostWithPostId;
@@ -98,16 +71,11 @@ const PostCard = ({ post, isLast }: Props) => {
           ))}
         </CategoryBadgeWrapper>
       </div>
-      <PostCardInfoWrapper>
-        <span className="date">
-          {getDateStringFromTimestamp(post.createdAt)}
-        </span>
-
-        <em className="like-count">{post.likes.length}</em>
-        <em className="comment-count">
-          {post.comments.length}
-        </em>
-      </PostCardInfoWrapper>
+      <Counter
+        createdAt={post.createdAt}
+        likes={post.likes}
+        commentsCount={post.comments.length}
+      />
     </PostCardLink>
   );
 };
