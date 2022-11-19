@@ -61,6 +61,17 @@ const Wrapper = styled.div`
 `;
 
 function App() {
+  console.clear();
+
+  console.log(
+    "%c주니어 개발자 박시우가 열심히 개발중인",
+    "font-family: 'Pretendard'; font-size: 16px; font-weight: 300"
+  );
+  console.log(
+    "%cShare it!",
+    "font-family: 'Pretendard'; font-size: 24px; font-weight: 800;background-image: linear-gradient(45deg, #fff710,#e47c0d); color: #ffffff; padding: 6px 8px 2px 11px;"
+  );
+
   return (
     <HelmetProvider>
       <GlobalStyle />
