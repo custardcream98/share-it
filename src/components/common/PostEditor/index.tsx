@@ -288,7 +288,7 @@ const PostEditor = ({ initialPostData }: Props) => {
         <ButtonForDisableable isDisabled={isSubmitOngoing}>
           {isSubmitOngoing ? (
             <LoadingIndicator isForSmall={true} />
-          ) : "글" + initialPostData ? (
+          ) : initialPostData ? (
             "수정하기"
           ) : (
             "올리기"
