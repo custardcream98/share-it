@@ -45,7 +45,7 @@ export const createComment = async ({
       comments: arrayUnion(createdDoc.id),
     });
 
-    sendMail({
+    await sendMail({
       token: authToken,
       email: {
         receiver: postUserEmail,

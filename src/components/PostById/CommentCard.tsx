@@ -50,6 +50,10 @@ const CommentCard = ({
     );
   };
 
+  // const onEditCommentClick = () => {
+
+  // }
+
   return (
     <Wrapper isLastCard={isLastCard}>
       <UsernameWrapper>
@@ -67,6 +71,13 @@ const CommentCard = ({
           >
             삭제
           </StyledLink>
+          // <StyledLink
+          //   as="button"
+          //   type="button"
+          //   onClick={onEditCommentClick}
+          // >
+          //   수정
+          // </StyledLink>
         )}
       </UsernameWrapper>
       <CommentRenderer>

@@ -1,3 +1,5 @@
+// const MAILING_SERVER_URL =
+//   "http://127.0.0.1:5001/share-it-5aad7/us-central1/app";
 const MAILING_SERVER_URL = "https://share-it-5aad7.web.app";
 
 export interface EMAIL {
@@ -18,8 +20,10 @@ const sendMail = async ({ token, email }: Token) => {
       `${MAILING_SERVER_URL}/sendMail`,
       {
         method: "POST",
+        mode: "cors",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
         keepalive: true,
         body: JSON.stringify({
