@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import GithubLogoImg from "imgs/Github-logo.svg";
+import GithubLogoImg from "public/imgs/Github-logo.svg";
 import { ROUTE_PATH } from "configs/router.config";
 import { loginGithubUser } from "utils/firebase/login";
 import useAuth from "hooks/useAuth";

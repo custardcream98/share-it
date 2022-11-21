@@ -4,7 +4,7 @@ import LoadingIndicator from "components/common/LoadingIndicator";
 import useCommentsData from "hooks/useCommentsData";
 import useCurrentUser from "hooks/useCurrentUser";
 
-import SpeechBalloonImg from "imgs/speech-balloon.png";
+import SpeechBalloonImg from "public/imgs/speech-balloon.png";
 import CommentEditor from "./CommentEditor";
 import CommentCard from "./CommentCard";
 

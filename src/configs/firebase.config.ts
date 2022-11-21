@@ -2,9 +2,9 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-import FoldedHandsEmojiImg from "imgs/folded-hands.png";
-import WinkEmojiImg from "imgs/wink.png";
-import PersonRaisingHandImg from "imgs/person-raising-hand.png";
+import FoldedHandsEmojiImg from "public/imgs/folded-hands.png";
+import WinkEmojiImg from "public/imgs/wink.png";
+import PersonRaisingHandImg from "public/imgs/person-raising-hand.png";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,

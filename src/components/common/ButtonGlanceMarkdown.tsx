@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import MarkdownOutlineImg from "imgs/markdown-outline.svg";
-import MarkdownFillImg from "imgs/markdown-fill.svg";
+import MarkdownOutlineImg from "public/imgs/markdown-outline.svg";
+import MarkdownFillImg from "public/imgs/markdown-fill.svg";
 import { MouseEventHandler } from "react";
 
 type ButtonGlanceMarkdownProps = {

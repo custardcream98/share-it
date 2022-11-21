@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import LogoImgSrc from "imgs/LogoImg.svg";
+import LogoImgSrc from "public/imgs/LogoImg.svg";
 
 const HeadingLogo = styled(Link)`
   font-weight: 800;

@@ -57,6 +57,13 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
     }
   }
+
+  @font-face {
+    font-family: 'D2Coding';
+    src: local('D2Coding'), url(./public/fonts/D2Coding.woff) format('woff');
+    font-style: normal;
+    font-weight: 400;
+  }
 `;
 
 const Wrapper = styled.div`

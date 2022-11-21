@@ -4,8 +4,8 @@ import styled, { css } from "styled-components";
 import { toggleLike } from "utils/firebase/likes";
 import useCurrentUser from "hooks/useCurrentUser";
 
-import ThumbsUpImg from "imgs/thumbs-up.png";
-import SpeechBalloonImg from "imgs/speech-balloon.png";
+import ThumbsUpImg from "public/imgs/thumbs-up.png";
+import SpeechBalloonImg from "public/imgs/speech-balloon.png";
 
 type CounterStyleProps = {
   isLikeClickable: boolean;
