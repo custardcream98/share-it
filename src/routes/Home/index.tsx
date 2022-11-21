@@ -5,8 +5,6 @@ import { ROUTE_PATH } from "configs/router.config";
 import usePostsSnapshot from "hooks/usePostsSnapshot";
 
 import Button from "components/common/Button";
-import Pagination from "components/common/Pagination";
-import PostCard from "components/PostCard";
 import LoadingIndicator from "components/common/LoadingIndicator";
 import PostsList from "components/common/PostsList";
 
@@ -14,10 +12,6 @@ const ButtonCreatePost = styled(Button)`
   display: block;
   width: fit-content;
   margin-left: auto;
-`;
-
-const SectionPosts = styled.section`
-  margin-top: 10px;
 `;
 
 const Wrapper = styled.div`
