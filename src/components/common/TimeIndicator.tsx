@@ -4,7 +4,7 @@ import getDateStringFromTimestamp from "utils/getDateStringFromTimestamp";
 const Time = styled.time`
   display: block;
   margin-top: 6px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   white-space: nowrap;
 `;
 

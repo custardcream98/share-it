@@ -5,8 +5,6 @@ import { cssCategoryBadgeNotColored } from "styles/css";
 const EmBadge = styled.em`
   ${cssCategoryBadgeNotColored}
 
-  margin-top: 10px;
-  margin-right: 10px;
   color: #fff;
   background-color: ${(props) => props.theme.accentColor};
 `;

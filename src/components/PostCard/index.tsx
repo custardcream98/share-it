@@ -13,11 +13,12 @@ type PostCardLinkProps = {
 };
 
 const PostCardLink = styled(Link)<PostCardLinkProps>`
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
+  display: block;
 
-  padding: 20px;
+  padding: 15px;
 
   border-top: 1px solid ${({ theme }) => theme.borderColor};
 
@@ -28,16 +29,32 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
 
   transition: all 0.2s ease;
 
-  .title {
-    display: block;
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-
   :hover {
     background-color: ${(props) =>
       props.theme.accentColor}20;
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+`;
+
+const PostInfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 10px;
+
+    > ul + div {
+      align-self: flex-end;
+    }
   }
 `;
 
@@ -52,25 +69,25 @@ const PostCard = ({ post, isLastCard }: Props) => {
       to={`${ROUTE_PATH.POST}/${post.postId}`}
       isLastCard={isLastCard}
     >
-      <div>
-        <strong className="title">{post.title}</strong>
-        <Username
-          username={post.username}
-          profilePhotoURL={post.profilePhotoURL}
-          createdAt={post.createdAt}
-          editedAt={post.editedAt}
-        />
-        {post.category.length !== 0 && (
-          <CategoryBadges
-            categories={post.category}
-            postId={post.postId}
-          />
-        )}
-      </div>
-      <Counter
-        likes={post.likes}
-        commentsCount={post.comments.length}
+      <Title>{post.title}</Title>
+      <Username
+        username={post.username}
+        profilePhotoURL={post.profilePhotoURL}
+        createdAt={post.createdAt}
+        editedAt={post.editedAt}
       />
+      <PostInfoWrapper>
+        <CategoryBadges
+          categories={post.category}
+          postId={post.postId}
+        />
+        <Counter
+          commentsCount={post.comments.length}
+          likes={post.likes}
+          isLikeClickable={true}
+          postId={post.postId}
+        />
+      </PostInfoWrapper>
     </PostCardLink>
   );
 };

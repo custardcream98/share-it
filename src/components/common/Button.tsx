@@ -7,12 +7,17 @@ const Button = styled.button`
   background-color: ${(props) => props.theme.accentColor};
 
   border-radius: 4px;
-  padding: 12px 16px;
+  padding: 8px 13px;
 
   transition: all 0.2s ease;
 
   :hover {
     scale: 1.1;
+  }
+
+  @media (max-width: 800px) {
+    padding: 4px 9px;
+    font-size: 0.8rem;
   }
 `;
 

@@ -12,7 +12,7 @@ const UsernameStyled = styled.span<UsernameStyledProps>`
 
   height: 34px;
   margin-right: 10px;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
 
   padding-left: 38px;
 

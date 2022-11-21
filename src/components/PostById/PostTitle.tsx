@@ -1,47 +1,54 @@
-import { MouseEvent } from "react";
 import styled from "styled-components";
 import {
   generatePath,
   useNavigate,
 } from "react-router-dom";
 
-import Button from "components/common/Button";
 import Counter from "components/common/Counter";
 import Username from "components/common/Username";
 import useCurrentUser from "hooks/useCurrentUser";
 import { deletePost } from "utils/firebase/posts";
 import { ROUTE_PATH } from "configs/router.config";
 import CategoryBadges from "components/common/CategoryBadges";
+import StyledLink from "components/common/StyledLink";
 
 const Wrapper = styled.header`
   position: relative;
-  margin: 20px 0;
+  margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid
     ${(props) => props.theme.borderColor};
 `;
 
-const EditButtonsWrapper = styled.div`
-  position: absolute;
-
-  right: 0;
-  top: -20px;
+const EditNav = styled.nav`
+  margin-bottom: 10px;
+  text-align: right;
+  > button + a {
+    margin-left: 15px;
+  }
 `;
 
 const Title = styled.h2`
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 20px;
-`;
-
-const ButtonEditPost = styled(Button)`
-  margin-left: 10px;
 `;
 
 const PostInfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 10px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 10px;
+
+    > ul + div {
+      align-self: flex-end;
+    }
+  }
 `;
 
 type Props = {
@@ -72,47 +79,48 @@ const PostTitle = ({
   const { uid } = useCurrentUser(false);
   const navigate = useNavigate();
 
-  const onEditPostClick = async (
-    event: MouseEvent<HTMLButtonElement>
-  ) => {
+  const onDeletePostClick = async () => {
     if (uid !== authorUid) {
       throw Error("잘못된 접근입니다.");
     }
 
-    const { name } = event.currentTarget;
-
-    switch (name) {
-      case "delete":
-        await deletePost(postId);
-        navigate(ROUTE_PATH.HOME);
-        break;
-      case "edit":
-        navigate(
-          generatePath(
-            `/${ROUTE_PATH.POST}/${ROUTE_PATH.EDIT}?postId=:postId`,
-            { postId }
-          )
-        );
-        break;
-    }
+    await deletePost(postId);
+    navigate(ROUTE_PATH.HOME);
   };
 
   return (
     <Wrapper>
+      {uid === authorUid && (
+        <EditNav>
+          <StyledLink
+            as="button"
+            type="button"
+            onClick={onDeletePostClick}
+          >
+            삭제하기
+          </StyledLink>
+          <StyledLink
+            to={generatePath(
+              `/${ROUTE_PATH.POST}/${ROUTE_PATH.EDIT}?postId=:postId`,
+              { postId }
+            )}
+          >
+            수정하기
+          </StyledLink>
+        </EditNav>
+      )}
       <Title>{title}</Title>
+      <Username
+        username={username}
+        profilePhotoURL={profilePhotoURL}
+        createdAt={createdAt}
+        editedAt={editedAt}
+      />
       <PostInfoWrapper>
-        <div>
-          <Username
-            username={username}
-            profilePhotoURL={profilePhotoURL}
-            createdAt={createdAt}
-            editedAt={editedAt}
-          />
-          <CategoryBadges
-            categories={categories}
-            postId={postId}
-          />
-        </div>
+        <CategoryBadges
+          categories={categories}
+          postId={postId}
+        />
         <Counter
           commentsCount={commentsCount}
           likes={likes}
@@ -120,24 +128,6 @@ const PostTitle = ({
           postId={postId}
         />
       </PostInfoWrapper>
-      {uid === authorUid && (
-        <EditButtonsWrapper>
-          <ButtonEditPost
-            type="button"
-            name="delete"
-            onClick={onEditPostClick}
-          >
-            삭제하기
-          </ButtonEditPost>
-          <ButtonEditPost
-            type="button"
-            name="edit"
-            onClick={onEditPostClick}
-          >
-            수정하기
-          </ButtonEditPost>
-        </EditButtonsWrapper>
-      )}
     </Wrapper>
   );
 };

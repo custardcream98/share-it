@@ -9,9 +9,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { User } from "firebase/auth";
 
-import MarkdownOutlineImg from "imgs/markdown-outline.svg";
-import MarkdownFillImg from "imgs/markdown-fill.svg";
-
 import Username from "components/common/Username";
 import { ROUTE_PATH } from "configs/router.config";
 import { ButtonForDisableable } from "components/common/Button";
@@ -20,6 +17,7 @@ import useCreateContentMetaData from "hooks/useCreateContentMetaData";
 import LoadingIndicator from "components/common/LoadingIndicator";
 import { Comment } from "interfaces";
 import { createComment } from "utils/firebase/comments";
+import ButtonGlanceMarkdown from "components/common/ButtonGlanceMarkdown";
 
 const Form = styled.form`
   position: relative;
@@ -39,6 +37,11 @@ const ButtonCommentEditorOpener = styled.button`
   border: 1px solid ${({ theme }) => theme.borderColor};
   padding: 17px;
   border-radius: 10px;
+  text-align: left;
+
+  @media (max-width: 800px) {
+    padding: 14px;
+  }
 `;
 
 const ButtonCommentSubmit = styled(ButtonForDisableable)`
@@ -50,25 +53,6 @@ const ButtonCommentSubmit = styled(ButtonForDisableable)`
   }
   ${({ isDisabled }) =>
     isDisabled && "pointer-events: none;"}
-`;
-
-type ButtonGlanceMarkdownProps = {
-  isWatchingMd: boolean;
-};
-const ButtonGlanceMarkdown = styled.button<ButtonGlanceMarkdownProps>`
-  width: 32px;
-  height: 32px;
-  margin-right: 5px;
-
-  background: ${({ isWatchingMd }) =>
-      isWatchingMd
-        ? `url(${MarkdownFillImg})`
-        : `url(${MarkdownOutlineImg})`}
-    no-repeat center/32px;
-  transition: all 0.2s ease;
-  :hover {
-    scale: 1.05;
-  }
 `;
 
 const TextareaCommentEditor = styled.textarea`
@@ -195,14 +179,10 @@ const CommentEditor = ({ currentUser, postId }: Props) => {
           />
           <ButtonGlanceMarkdown
             isWatchingMd={isWatchingMd}
-            type="button"
-            onClick={toggleMarkdownWatchigState}
-          >
-            <span className="sr-only">
-              마크다운 변환 결과{" "}
-              {isWatchingMd ? "닫기" : "보기"}
-            </span>
-          </ButtonGlanceMarkdown>
+            toggleMarkdownWatchingState={
+              toggleMarkdownWatchigState
+            }
+          />
         </EditorHeaderWrapper>
         <label className="sr-only" htmlFor="comment">
           댓글 입력란

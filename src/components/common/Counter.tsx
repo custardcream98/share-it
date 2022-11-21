@@ -29,20 +29,20 @@ const CounterWrapper = styled.div<CounterStyleProps>`
     width: fit-content;
     display: inline-block;
     padding-left: 25px;
-    font-size: 1rem;
-    height: 20px;
-    line-height: 20px;
+    font-size: 0.9rem;
+    height: 18px;
+    line-height: 18px;
   }
   .like-count {
     background: url(${ThumbsUpImg}) no-repeat left
-      center/20px;
+      center/18px;
     ${({ isLikeClickable }) =>
       isLikeClickable && cssLikeClickable};
   }
   .comment-count {
     margin-left: 18px;
     background: url(${SpeechBalloonImg}) no-repeat left
-      center/20px;
+      center/18px;
   }
 `;
 

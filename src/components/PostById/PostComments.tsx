@@ -22,6 +22,10 @@ const Wrapper = styled.section`
 
     background: url(${SpeechBalloonImg}) no-repeat left
       center/20px;
+
+    @media (max-width: 800px) {
+      font-size: 1.15rem;
+    }
   }
 `;
 

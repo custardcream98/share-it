@@ -7,6 +7,7 @@ import { CommentWithCommentId } from "interfaces";
 import CrossmarkImg from "imgs/crossmark.svg";
 import { deleteComment } from "utils/firebase/comments";
 import useAuth from "hooks/useAuth";
+import StyledLink from "components/common/StyledLink";
 
 type WrapperProps = {
   isLastCard: boolean;
@@ -24,20 +25,11 @@ const Wrapper = styled.li<WrapperProps>`
 `;
 const UsernameWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const CommentRenderer = styled(MarkdownRenderer)`
   margin-top: 13px;
-`;
-
-const ButtonDeleteComment = styled.button`
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-
-  margin-left: 10px;
-
-  background: url(${CrossmarkImg}) no-repeat center/30px;
 `;
 
 type Props = {
@@ -68,10 +60,13 @@ const CommentCard = ({
           editedAt={commentData.editedAt}
         />
         {commentData.uid === auth?.currentUser?.uid && (
-          <ButtonDeleteComment
+          <StyledLink
+            as="button"
             type="button"
             onClick={onDeleteCommentClick}
-          />
+          >
+            삭제
+          </StyledLink>
         )}
       </UsernameWrapper>
       <CommentRenderer>

@@ -2,7 +2,10 @@ import styled from "styled-components";
 import CategoryBadge from "./CategoryBadge";
 
 const CategoryBadgeWrapper = styled.ul`
-  display: inline-block;
+  display: inline-flex;
+  gap: 5px;
+
+  flex-wrap: wrap;
 `;
 
 type Props = {

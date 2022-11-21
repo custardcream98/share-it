@@ -1,13 +1,14 @@
-import LoadingIndicator from "components/common/LoadingIndicator";
-import PostEditor from "components/common/PostEditor";
-import { ROUTE_PATH } from "configs/router.config";
-import useCurrentUser from "hooks/useCurrentUser";
-import usePostData from "hooks/usePostData";
 import { useEffect } from "react";
 import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
+
+import LoadingIndicator from "components/common/LoadingIndicator";
+import PostEditor from "components/common/PostEditor";
+import { ROUTE_PATH } from "configs/router.config";
+import useCurrentUser from "hooks/useCurrentUser";
+import usePostData from "hooks/usePostData";
 
 const PostEditPage = () => {
   const [searchParams] = useSearchParams();

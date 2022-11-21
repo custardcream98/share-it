@@ -24,17 +24,35 @@ import {
 import textareaDefalutDescription from "./textareaDefalutDescription";
 import LoadingIndicator from "../LoadingIndicator";
 import { ButtonForDisableable } from "../Button";
+import ButtonGlanceMarkdown from "../ButtonGlanceMarkdown";
+
+const BREAK_POINT = "600px";
 
 const TextEditorWrapper = styled.div`
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: ${BREAK_POINT}) {
+    margin-top: 0px;
+  }
 `;
 
-const StyledRenderer = styled(MarkdownRenderer)`
+type StyleProps = {
+  isWatchingMd: boolean;
+};
+
+const StyledRenderer = styled(MarkdownRenderer)<StyleProps>`
   width: calc(50% - 10px);
   height: calc(87vh - ${navbarHeight});
   overflow: auto;
+
+  @media (max-width: ${BREAK_POINT}) {
+    visibility: ${({ isWatchingMd }) =>
+      isWatchingMd ? "visible" : "hidden"};
+    width: ${({ isWatchingMd }) =>
+      isWatchingMd ? "100%" : "0%"};
+  }
 `;
 
 const cssInputBorder = css`
@@ -42,7 +60,7 @@ const cssInputBorder = css`
   border: 1px solid ${(props) => props.theme.borderColor};
 `;
 
-const TextareaEditor = styled.textarea`
+const TextareaEditor = styled.textarea<StyleProps>`
   resize: none;
 
   width: calc(50% - 10px);
@@ -55,6 +73,24 @@ const TextareaEditor = styled.textarea`
   font-family: inherit;
   font-size: 1.1rem;
   line-height: 1.5;
+
+  @media (max-width: ${BREAK_POINT}) {
+    visibility: ${({ isWatchingMd }) =>
+      isWatchingMd ? "hidden" : "visible"};
+    width: ${({ isWatchingMd }) =>
+      isWatchingMd ? "0%" : "100%"};
+  }
+`;
+
+const ButtonGlanceMarkdownForEditor = styled(
+  ButtonGlanceMarkdown
+)`
+  visibility: hidden;
+  height: 0;
+  @media (max-width: ${BREAK_POINT}) {
+    visibility: visible;
+    height: 32px;
+  }
 `;
 
 const InputTitle = styled.input`
@@ -66,6 +102,10 @@ const InputTitle = styled.input`
   font-weight: 600;
   font-size: 1.2rem;
 
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
+
   ${cssInputBorder}
 `;
 
@@ -74,8 +114,12 @@ const InputTitleWrapper = styled.div`
 `;
 
 const CheckboxWrapper = styled.div`
-  margin: 15px 0;
-  text-align: right;
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 5px;
+
   padding-bottom: 13px;
 
   border-bottom: 2px solid
@@ -84,7 +128,6 @@ const CheckboxWrapper = styled.div`
   label {
     padding: 5px;
     padding-left: 27px;
-    margin-left: 10px;
     border-radius: 10px;
     transition: ease 0.15s;
 
@@ -168,8 +211,12 @@ const PostEditor = ({ initialPostData }: Props) => {
   );
   const [isSubmitOngoing, setIsSubmitOngoing] =
     useState(false);
+  const [isWatchingMd, setIsWatchingMd] = useState(false);
 
   const inputTitleRef = useRef<HTMLInputElement>(null);
+
+  const toggleMarkdownWatchigState = () =>
+    setIsWatchingMd((prev) => !prev);
 
   const onEditorChange = (
     event: ChangeEvent<HTMLTextAreaElement>
@@ -265,6 +312,12 @@ const PostEditor = ({ initialPostData }: Props) => {
           />
         ))}
       </CheckboxWrapper>
+      <ButtonGlanceMarkdownForEditor
+        isWatchingMd={isWatchingMd}
+        toggleMarkdownWatchingState={
+          toggleMarkdownWatchigState
+        }
+      />
       <TextEditorWrapper>
         <label className="sr-only" htmlFor="editor">
           내용 입력란
@@ -275,8 +328,11 @@ const PostEditor = ({ initialPostData }: Props) => {
           onChange={onEditorChange}
           placeholder="내용을 입력해주세요."
           value={content}
+          isWatchingMd={isWatchingMd}
         />
-        <StyledRenderer>{content}</StyledRenderer>
+        <StyledRenderer isWatchingMd={isWatchingMd}>
+          {content}
+        </StyledRenderer>
       </TextEditorWrapper>
     </form>
   );

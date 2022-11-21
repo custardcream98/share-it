@@ -2,7 +2,7 @@ import { css } from "styled-components";
 import { maxWidth } from "./styleConstants";
 
 export const cssMaxWidth = css`
-  width: min(${maxWidth}, calc(100% - 60px));
+  width: min(${maxWidth}, calc(100% - 30px));
   margin: 0 auto;
 `;
 
@@ -45,6 +45,7 @@ export const cssCategoryBadgeNotColored = css<CategoryBadgeProps>`
   padding: 5px;
   padding-left: 27px;
 
+  font-size: 0.85rem;
   border-radius: 10px;
 
   cursor: pointer;
