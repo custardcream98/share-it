@@ -1,12 +1,10 @@
 import ProfileTitle from "components/Profile/Title";
-import useAuth from "hooks/useAuth";
 import usePostsSnapshot from "hooks/usePostsSnapshot";
 import PostsList from "components/common/PostsList";
 import LoadingIndicator from "components/common/LoadingIndicator";
 
 const MyPostsPage = () => {
-  const auth = useAuth();
-  const posts = usePostsSnapshot(auth?.currentUser?.uid);
+  const posts = usePostsSnapshot(true);
 
   if (!posts) {
     return <LoadingIndicator />;

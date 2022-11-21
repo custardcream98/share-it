@@ -7,34 +7,42 @@ import {
 
 import { postCollectionRef } from "utils/firebase/references";
 import { Post, PostWithPostId } from "interfaces";
+import useAuth from "./useAuth";
 
-export default (uid?: string) => {
+export default (useUid?: boolean) => {
   const [posts, setPosts] = useState<PostWithPostId[]>();
+  const auth = useAuth();
 
   useLayoutEffect(() => {
-    return onSnapshot(
-      uid
-        ? query(postCollectionRef, where("uid", "==", uid))
-        : postCollectionRef,
-      (snapshot) => {
-        const newPosts = snapshot.docs
-          .sort(
-            (post1, post2) =>
-              (post2.data() as unknown as Post).createdAt -
-              (post1.data() as unknown as Post).createdAt
-          )
-          .map(
-            (document) =>
-              ({
-                ...document.data(),
-                postId: document.id,
-              } as unknown as PostWithPostId)
-          );
+    if ((useUid && auth && auth.currentUser) || !useUid) {
+      return onSnapshot(
+        useUid && auth && auth.currentUser
+          ? query(
+              postCollectionRef,
+              where("uid", "==", auth.currentUser.uid)
+            )
+          : postCollectionRef,
+        (snapshot) => {
+          const newPosts = snapshot.docs
+            .sort(
+              (post1, post2) =>
+                (post2.data() as unknown as Post)
+                  .createdAt -
+                (post1.data() as unknown as Post).createdAt
+            )
+            .map(
+              (document) =>
+                ({
+                  ...document.data(),
+                  postId: document.id,
+                } as unknown as PostWithPostId)
+            );
 
-        setPosts(newPosts);
-      }
-    );
-  }, []);
+          setPosts(newPosts);
+        }
+      );
+    }
+  }, [auth]);
 
   return posts;
 };
