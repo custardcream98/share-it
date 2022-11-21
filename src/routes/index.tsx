@@ -18,6 +18,7 @@ import CheckAuth from "routes/CheckAuth";
 import PostByPostIdPage from "./Post/[postId]";
 import PostEditPage from "./Post/Edit";
 import Footer from "components/Footer";
+import MyPostsPage from "./Profile/Myposts";
 
 const Main = styled.main`
   margin-top: calc(${navbarHeight} + 10px);
@@ -38,17 +39,30 @@ const AppRouter = () => {
               path={ROUTE_PATH.HOME}
               element={<HomePage />}
             />
-            <Route
-              path={ROUTE_PATH.PROFILE}
-              element={
-                <CheckAuth>
-                  <Helmet>
-                    <title>Share it!: 프로필</title>
-                  </Helmet>
-                  <ProfilePage />
-                </CheckAuth>
-              }
-            />
+            <Route path={ROUTE_PATH.PROFILE}>
+              <Route
+                path={ROUTE_PATH.MYPOSTS}
+                element={
+                  <CheckAuth>
+                    <Helmet>
+                      <title>Share it!: 내가 쓴 글</title>
+                    </Helmet>
+                    <MyPostsPage />
+                  </CheckAuth>
+                }
+              />
+              <Route
+                path=""
+                element={
+                  <CheckAuth>
+                    <Helmet>
+                      <title>Share it!: 프로필</title>
+                    </Helmet>
+                    <ProfilePage />
+                  </CheckAuth>
+                }
+              />
+            </Route>
             <Route path={ROUTE_PATH.POST}>
               <Route
                 path={ROUTE_PATH.NEWPOST}

@@ -36,7 +36,6 @@ export interface CommentWithCommentId extends Comment {
 }
 
 export interface Profile {
-  posts: PostId[];
   comments: PostId[];
   likes: PostId[];
 }

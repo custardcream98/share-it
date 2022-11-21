@@ -23,7 +23,6 @@ const createProfileIfUserIsNew = async (user: User) => {
 
   if (!profileSnap.exists()) {
     const newUserProfile: Profile = {
-      posts: [],
       comments: [],
       likes: [],
     };

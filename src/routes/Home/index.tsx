@@ -8,6 +8,7 @@ import Button from "components/common/Button";
 import Pagination from "components/common/Pagination";
 import PostCard from "components/PostCard";
 import LoadingIndicator from "components/common/LoadingIndicator";
+import PostsList from "components/common/PostsList";
 
 const ButtonCreatePost = styled(Button)`
   display: block;
@@ -44,22 +45,8 @@ const HomePage = () => {
         >
           글 작성하기
         </ButtonCreatePost>
-        <SectionPosts>
-          <h2 className="sr-only">포스트 리스트</h2>
-          <ol>
-            {posts.map((post, i) => (
-              <li key={post.uid + post.createdAt}>
-                <PostCard
-                  post={post}
-                  isLastCard={i === posts.length - 1}
-                />
-              </li>
-            ))}
-          </ol>
-        </SectionPosts>
+        <PostsList posts={posts} />
       </PostWrapper>
-      {/* TODO: 페이지네이션 구현 */}
-      <Pagination />
     </Wrapper>
   );
 };

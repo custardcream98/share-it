@@ -1,7 +1,21 @@
 import Button from "components/common/Button";
+import StyledLink from "components/common/StyledLink";
 import { fireAuth } from "configs/firebase.config";
 import { ROUTE_PATH } from "configs/router.config";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    width: fit-content;
+    + * {
+      margin-top: 15px;
+    }
+  }
+`;
 
 const LogoutButton = () => {
   const navigate = useNavigate();
@@ -13,7 +27,14 @@ const LogoutButton = () => {
 };
 
 const ProfilePage = () => {
-  return <LogoutButton />;
+  return (
+    <Wrapper>
+      <LogoutButton />
+      <StyledLink to={ROUTE_PATH.MYPOSTS}>
+        내가 쓴 글
+      </StyledLink>
+    </Wrapper>
+  );
 };
 
 export default ProfilePage;
