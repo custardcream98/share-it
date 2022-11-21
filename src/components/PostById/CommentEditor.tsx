@@ -118,7 +118,8 @@ const CommentEditor = ({
       return;
     }
 
-    navigate(ROUTE_PATH.HOME, { replace: true });
+    alert("댓글을 남기려면 로그인해주세요.");
+    navigate("/" + ROUTE_PATH.AUTH, { replace: true });
   };
   const focusToCommentEditor = () =>
     commentEditorRef.current?.focus();
