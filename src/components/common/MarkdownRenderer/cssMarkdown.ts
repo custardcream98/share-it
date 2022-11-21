@@ -197,4 +197,12 @@ export default css<Props>`
       }
     }
   }
+
+  blockquote {
+    border-left: 2px solid
+      ${({ theme }) => theme.accentColor};
+    padding-left: 10px;
+    color: ${({ theme }) => theme.subTextColor};
+    margin: 10px 0;
+  }
 `;

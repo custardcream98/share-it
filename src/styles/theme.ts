@@ -5,4 +5,5 @@ export const lightTheme: DefaultTheme = {
   bgColor: "white",
   accentColor: "#FFA500",
   borderColor: "rgb(204, 204, 204)",
+  subTextColor: "rgb(150, 150, 150)",
 };

@@ -16,6 +16,8 @@ export default `# h1
 2. 숫자로 넣으시면 됩니다.
    1. 똑같이 스페이스바 세 번을 앞에 넣으면 한 단계 들어갈 수 있습니다.
 
+> blockquote는 이렇게 넣습니다.
+
 [링크](https://custardcream.vercel.app/)는 이렇게 넣을 수 있습니다.
 
 줄바꿈을 하려면 두 번 엔터해주세요.
