@@ -91,3 +91,26 @@ export const deleteComment = async (
     return false;
   }
 };
+
+export const updateComment = async (
+  commentId: string,
+  commentContent: string
+) => {
+  try {
+    const commentDocRef = doc(
+      commentCollectionRef,
+      commentId
+    );
+
+    await updateDoc(commentDocRef, {
+      content: commentContent,
+      editedAt: Date.now(),
+    });
+
+    return true;
+  } catch (error) {
+    console.log(error);
+    alert("에러가 발생했습니다!\n" + error);
+    return false;
+  }
+};
