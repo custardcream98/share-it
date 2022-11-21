@@ -35,9 +35,15 @@ const ListComments = styled.ol`
 
 type Props = {
   postId: string;
+  postUserEmail: string;
+  postTitle: string;
 };
 
-const PostComments = ({ postId }: Props) => {
+const PostComments = ({
+  postId,
+  postUserEmail,
+  postTitle,
+}: Props) => {
   const commentsData = useCommentsData(postId);
   const currentUser = useCurrentUser(false);
 
@@ -50,6 +56,8 @@ const PostComments = ({ postId }: Props) => {
       <CommentEditor
         currentUser={currentUser}
         postId={postId}
+        postUserEmail={postUserEmail}
+        postTitle={postTitle}
       />
       {commentsData.length !== 0 && (
         <ListComments>

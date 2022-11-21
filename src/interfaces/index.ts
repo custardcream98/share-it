@@ -12,6 +12,7 @@ export interface ContentMetaData {
   uid: Uid;
   profilePhotoURL: URL;
   username: Username;
+  email: string;
 }
 export interface Likes {
   [uid: string]: number;

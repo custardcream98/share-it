@@ -7,6 +7,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { Comment } from "interfaces";
+import sendMail from "utils/fetch/sendMail";
 
 import {
   commentCollectionRef,
@@ -14,9 +15,18 @@ import {
   postCollectionRef,
 } from "./references";
 
-export const createComment = async (
-  commentData: Comment
-) => {
+type PropForCreatingComment = {
+  postUserEmail: string;
+  postTitle: string;
+  commentData: Comment;
+  authToken: string;
+};
+export const createComment = async ({
+  postUserEmail,
+  postTitle,
+  commentData,
+  authToken,
+}: PropForCreatingComment) => {
   try {
     const createdDoc = await addDoc(
       commentCollectionRef,
@@ -33,6 +43,17 @@ export const createComment = async (
     });
     await updateDoc(postDocRef, {
       comments: arrayUnion(createdDoc.id),
+    });
+
+    sendMail({
+      token: authToken,
+      email: {
+        receiver: postUserEmail,
+        title: postTitle,
+        postId: commentData.postId,
+        commentContent: commentData.content,
+        senderUsername: commentData.username,
+      },
     });
 
     return createdDoc;

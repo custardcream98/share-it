@@ -20,6 +20,7 @@ export default (): ContentMetaData | undefined => {
         auth.currentUser.displayName ??
         auth.currentUser.email ??
         "알 수 없는 사용자",
+      email: auth.currentUser.email ?? "none",
     };
   }
 };

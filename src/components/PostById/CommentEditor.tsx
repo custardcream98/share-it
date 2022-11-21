@@ -88,9 +88,16 @@ type Props = {
         uid: string;
       };
   postId: string;
+  postUserEmail: string;
+  postTitle: string;
 };
 
-const CommentEditor = ({ currentUser, postId }: Props) => {
+const CommentEditor = ({
+  currentUser,
+  postId,
+  postUserEmail,
+  postTitle,
+}: Props) => {
   const navigate = useNavigate();
 
   const [isCommentEditorOpened, setIsCommentEditorOpened] =
@@ -145,7 +152,14 @@ const CommentEditor = ({ currentUser, postId }: Props) => {
       ...contentMetaData,
     };
 
-    const result = await createComment(commentData);
+    const result = await createComment({
+      postUserEmail,
+      postTitle,
+      commentData,
+      authToken: await (currentUser as User).getIdToken(
+        true
+      ),
+    });
 
     if (result) {
       setCommentContent("");

@@ -40,7 +40,11 @@ const PostByPostIdPage = () => {
           {postData.content}
         </MarkdownRenderer>
       </section>
-      <PostComments postId={postId} />
+      <PostComments
+        postId={postId}
+        postUserEmail={postData.email}
+        postTitle={postData.title}
+      />
     </>
   );
 };
