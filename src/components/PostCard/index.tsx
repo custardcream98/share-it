@@ -84,7 +84,7 @@ const PostCard = ({ post, isLastCard }: Props) => {
         <Counter
           commentsCount={post.comments.length}
           likes={post.likes}
-          isLikeClickable={true}
+          isLikeClickable={false}
           postId={post.postId}
         />
       </PostInfoWrapper>

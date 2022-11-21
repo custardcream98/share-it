@@ -56,9 +56,12 @@ const ButtonCommentSubmit = styled(ButtonForDisableable)`
 `;
 
 const TextareaCommentEditor = styled.textarea`
+  position: absolute;
+  top: 0;
+  left: 0;
+
   width: 100%;
-  height: 100px;
-  margin-top: 5px;
+  height: calc(100% - 5px);
   padding: 5px;
 
   font-size: 1.1rem;
@@ -73,12 +76,39 @@ const TextareaCommentEditor = styled.textarea`
   }
 `;
 const RenderedComment = styled(MarkdownRenderer)`
+  position: absolute;
+  top: 0;
+  left: 0;
+
   width: 100%;
-  height: 100px;
+  height: 100%;
   margin-top: 5px;
   padding: 5px;
 
   overflow-y: auto;
+`;
+
+const FakeRender = styled.div`
+  width: 100%;
+  height: fit-content;
+  min-height: 100px;
+  margin-top: 5px;
+  padding: 5px;
+
+  font-size: 1.1rem;
+
+  white-space: pre;
+
+  color: transparent;
+  background-color: transparent;
+
+  @media (max-width: 800px) {
+    font-size: 0.95rem;
+  }
+`;
+
+const CommentEditorTextareaWrapper = styled.div`
+  position: relative;
 `;
 
 type Props = {
@@ -202,21 +232,24 @@ const CommentEditor = ({
         <label className="sr-only" htmlFor="comment">
           댓글 입력란
         </label>
-        <TextareaCommentEditor
-          id="comment"
-          ref={commentEditorRef}
-          spellCheck={false}
-          placeholder="댓글을 입력해주세요. 댓글에서도 마크다운 문법을 사용할 수 있습니다. 변환 결과를 보려면 오른쪽 위 마크다운 아이콘을 클릭해주세요."
-          hidden={isWatchingMd}
-          value={commentContent}
-          onChange={onCommentTextareaChange}
-          required
-        />
-        {isWatchingMd && (
-          <RenderedComment isForComment={true}>
-            {commentContent ?? ""}
-          </RenderedComment>
-        )}
+        <CommentEditorTextareaWrapper>
+          <FakeRender>{commentContent}</FakeRender>
+          <TextareaCommentEditor
+            id="comment"
+            ref={commentEditorRef}
+            spellCheck={false}
+            placeholder="댓글을 입력해주세요. 댓글에서도 마크다운 문법을 사용할 수 있습니다. 변환 결과를 보려면 오른쪽 위 마크다운 아이콘을 클릭해주세요."
+            hidden={isWatchingMd}
+            value={commentContent}
+            onChange={onCommentTextareaChange}
+            required
+          />
+          {isWatchingMd && (
+            <RenderedComment isForComment={true}>
+              {commentContent ?? ""}
+            </RenderedComment>
+          )}
+        </CommentEditorTextareaWrapper>
         <ButtonCommentSubmit isDisabled={isSubmitOngoing}>
           {isSubmitOngoing ? (
             <LoadingIndicator isForSmall={true} />
