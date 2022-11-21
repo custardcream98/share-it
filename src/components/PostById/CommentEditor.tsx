@@ -121,7 +121,7 @@ const CommentEditor = ({
     navigate(ROUTE_PATH.HOME, { replace: true });
   };
   const focusToCommentEditor = () =>
-    isWatchingMd && commentEditorRef.current?.focus();
+    commentEditorRef.current?.focus();
   const toggleMarkdownWatchigState = () =>
     setIsWatchingMd((prev) => !prev);
   const onCommentTextareaChange = (
@@ -170,10 +170,10 @@ const CommentEditor = ({
   };
 
   useEffect(() => {
-    if (isCommentEditorOpened) {
+    if (isCommentEditorOpened && !isWatchingMd) {
       focusToCommentEditor();
     }
-  }, [isCommentEditorOpened]);
+  }, [isCommentEditorOpened, isWatchingMd]);
 
   return (
     <>
