@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -15,8 +15,10 @@ export default (postId: string | undefined) => {
     Post | undefined
   >();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!postId) {
+      console.log("없음");
+
       navigate(ROUTE_PATH.HOME, { replace: true });
       return;
     }

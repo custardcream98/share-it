@@ -4,14 +4,14 @@ import {
   where,
 } from "firebase/firestore";
 import { Comment, CommentWithCommentId } from "interfaces";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { commentCollectionRef } from "utils/firebase/references";
 
 export default (postId: string) => {
   const [comments, setComments] =
     useState<CommentWithCommentId[]>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     return onSnapshot(
       query(
         commentCollectionRef,

@@ -62,6 +62,10 @@ const AppRouter = () => {
                   </CheckAuth>
                 }
               />
+              <Route
+                path="*"
+                element={<Navigate to="/" replace />}
+              />
             </Route>
             <Route path={ROUTE_PATH.POST}>
               <Route
@@ -86,6 +90,10 @@ const AppRouter = () => {
               <Route
                 path=":postId"
                 element={<PostByPostIdPage />}
+              />
+              <Route
+                path="*"
+                element={<Navigate to="/" replace />}
               />
             </Route>
             <Route

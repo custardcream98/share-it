@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const auth = useAuth();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (auth) {
       navigate(ROUTE_PATH.HOME, { replace: true });
     }

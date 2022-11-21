@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import {
   onSnapshot,
   query,
@@ -11,7 +11,7 @@ import { Post, PostWithPostId } from "interfaces";
 export default (uid?: string) => {
   const [posts, setPosts] = useState<PostWithPostId[]>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     return onSnapshot(
       uid
         ? query(postCollectionRef, where("uid", "==", uid))

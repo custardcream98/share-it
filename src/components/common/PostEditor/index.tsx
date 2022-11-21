@@ -1,11 +1,11 @@
 import {
   useState,
   ChangeEvent,
-  useEffect,
   useRef,
   FormEvent,
   Dispatch,
   SetStateAction,
+  useLayoutEffect,
 } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
@@ -170,7 +170,7 @@ const CheckboxCategory = ({
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (initialState && checkboxRef.current) {
       checkboxRef.current.checked = true;
       onCheckboxChange();
@@ -266,7 +266,7 @@ const PostEditor = ({ initialPostData }: Props) => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (initialPostData && inputTitleRef.current) {
       inputTitleRef.current.value = initialPostData.title;
     }

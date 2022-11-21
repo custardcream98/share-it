@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import {
   useNavigate,
   useSearchParams,
@@ -23,7 +23,7 @@ const PostEditPage = () => {
 
   const postData = usePostData(postId);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (postData) {
       if (postData.uid !== uid) {
         navigate(ROUTE_PATH.HOME, { replace: true });
