@@ -9,6 +9,9 @@ import useCurrentUser from "hooks/useCurrentUser";
 import SpeechBalloonImg from "public/imgs/speech-balloon.png";
 import "styles/D2Coding.css";
 import { MOBILE_BREAK_POINT } from "styles/styleConstants";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ROUTE_PATH } from "configs/router.config";
 
 const Wrapper = styled.section`
   margin-top: 30px;
@@ -43,6 +46,18 @@ const ListComments = styled.ol`
   }
 `;
 
+const ButtonCommentEditorOpener = styled.button`
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.borderColor};
+  padding: 17px;
+  border-radius: 10px;
+  text-align: left;
+
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    padding: 14px;
+  }
+`;
+
 type Props = {
   postId: string;
   postUserEmail: string;
@@ -54,8 +69,22 @@ const PostComments = ({
   postUserEmail,
   postTitle,
 }: Props) => {
+  const navigate = useNavigate();
   const commentsData = useCommentsData(postId);
   const currentUser = useCurrentUser(false);
+
+  const [isCommentEditorOpened, setIsCommentEditorOpened] =
+    useState(false);
+
+  const onCommentEditorOpenerClick = () => {
+    if (currentUser.uid !== "anon") {
+      setIsCommentEditorOpened(true);
+      return;
+    }
+
+    alert("댓글을 남기려면 로그인해주세요.");
+    navigate("/" + ROUTE_PATH.AUTH, { replace: true });
+  };
 
   if (!commentsData) {
     return <LoadingIndicator isForSmall={true} />;
@@ -68,7 +97,16 @@ const PostComments = ({
         postId={postId}
         postUserEmail={postUserEmail}
         postTitle={postTitle}
+        hidden={!isCommentEditorOpened}
+        focused={isCommentEditorOpened}
       />
+      <ButtonCommentEditorOpener
+        type="button"
+        onClick={onCommentEditorOpenerClick}
+        hidden={isCommentEditorOpened}
+      >
+        댓글을 입력해주세요
+      </ButtonCommentEditorOpener>
       {commentsData.length !== 0 && (
         <ListComments>
           {commentsData.map((commentData, i) => (

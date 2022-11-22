@@ -1,23 +1,26 @@
 import {
   ChangeEvent,
   FormEvent,
+  MouseEvent,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { User } from "firebase/auth";
 
 import Username from "components/common/Username";
-import { ROUTE_PATH } from "configs/router.config";
 import { ButtonForDisableable } from "components/common/Buttons/Button";
 import MarkdownRenderer from "components/common/MarkdownRenderer";
 import useCreateContentMetaData from "hooks/useCreateContentMetaData";
 import LoadingIndicator from "components/common/LoadingIndicator";
-import { Comment } from "interfaces";
-import { createComment } from "utils/firebase/comments";
+import { Comment, CommentWithCommentId } from "interfaces";
+import {
+  createComment,
+  updateComment,
+} from "utils/firebase/comments";
 import ButtonGlanceMarkdown from "components/common/Buttons/ButtonGlanceMarkdown";
+import { MOBILE_BREAK_POINT } from "styles/styleConstants";
 
 const Form = styled.form`
   position: relative;
@@ -32,22 +35,10 @@ const EditorHeaderWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const ButtonCommentEditorOpener = styled.button`
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.borderColor};
-  padding: 17px;
-  border-radius: 10px;
-  text-align: left;
-
-  @media (max-width: 800px) {
-    padding: 14px;
-  }
-`;
-
 const ButtonCommentSubmit = styled(ButtonForDisableable)`
-  display: block;
-  padding: 10px 13px;
-  margin-left: auto;
+  display: inline-block;
+  margin-left: 10px;
+
   :hover {
     scale: 1.05;
   }
@@ -65,13 +56,23 @@ const TextareaCommentEditor = styled.textarea`
   padding: 5px;
 
   font-size: 1.1rem;
+  line-height: 1.4;
   font-family: "Pretendard";
 
   border: none;
   border-radius: 10px;
   resize: none;
 
-  @media (max-width: 800px) {
+  ::placeholder {
+    line-height: 1.4;
+    font-size: 1.1rem;
+    font-family: "Pretendard";
+    @media (max-width: ${MOBILE_BREAK_POINT}) {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
     font-size: 0.95rem;
   }
 `;
@@ -102,7 +103,7 @@ const FakeRender = styled.div`
   color: transparent;
   background-color: transparent;
 
-  @media (max-width: 800px) {
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
     font-size: 0.95rem;
   }
 `;
@@ -111,30 +112,41 @@ const CommentEditorTextareaWrapper = styled.div`
   position: relative;
 `;
 
+const EditButtonWrapper = styled.div`
+  margin-left: auto;
+  width: fit-content;
+`;
+
 type Props = {
+  initialCommentData?: CommentWithCommentId;
   currentUser:
     | User
     | {
         uid: string;
       };
   postId: string;
-  postUserEmail: string;
-  postTitle: string;
+  postUserEmail?: string;
+  postTitle?: string;
+  hidden?: boolean;
+  focused?: boolean;
+  onCancleEditClick?: () => void;
 };
 
 const CommentEditor = ({
+  initialCommentData,
   currentUser,
   postId,
   postUserEmail,
   postTitle,
+  hidden = false,
+  focused = false,
+  onCancleEditClick,
 }: Props) => {
-  const navigate = useNavigate();
-
-  const [isCommentEditorOpened, setIsCommentEditorOpened] =
-    useState(false);
   const [isWatchingMd, setIsWatchingMd] = useState(false);
   const [commentContent, setCommentContent] =
-    useState<string>("");
+    useState<string>(
+      initialCommentData ? initialCommentData.content : ""
+    );
   const [isSubmitOngoing, setIsSubmitOngoing] =
     useState(false);
   const commentEditorRef =
@@ -142,17 +154,6 @@ const CommentEditor = ({
 
   const contentMetaData = useCreateContentMetaData();
 
-  const onCommentEditorOpenerClick = () => {
-    if (currentUser.uid !== "anon") {
-      setIsCommentEditorOpened(true);
-      return;
-    }
-
-    alert("댓글을 남기려면 로그인해주세요.");
-    navigate("/" + ROUTE_PATH.AUTH, { replace: true });
-  };
-  const focusToCommentEditor = () =>
-    commentEditorRef.current?.focus();
   const toggleMarkdownWatchigState = () =>
     setIsWatchingMd((prev) => !prev);
   const onCommentTextareaChange = (
@@ -177,20 +178,46 @@ const CommentEditor = ({
 
     setIsSubmitOngoing(true);
 
-    const commentData: Comment = {
-      content: commentContent,
-      postId,
-      ...contentMetaData,
-    };
+    let result;
+    if (!initialCommentData) {
+      if (
+        !postUserEmail ||
+        !postTitle ||
+        !contentMetaData
+      ) {
+        setCommentContent("");
+        setIsWatchingMd(false);
+        setIsSubmitOngoing(false);
+        throw Error("CommentEditor 잘못된 사용");
+      }
 
-    const result = await createComment({
-      postUserEmail,
-      postTitle,
-      commentData,
-      authToken: await (currentUser as User).getIdToken(
-        true
-      ),
-    });
+      const commentData: Comment = {
+        content: commentContent,
+        postId,
+        ...contentMetaData,
+      };
+
+      result = await createComment({
+        postUserEmail,
+        postTitle,
+        commentData,
+        authToken: await (currentUser as User).getIdToken(
+          true
+        ),
+      });
+    } else {
+      if (!onCancleEditClick) {
+        setCommentContent("");
+        setIsWatchingMd(false);
+        setIsSubmitOngoing(false);
+        throw Error("CommentEditor 잘못된 사용");
+      }
+      result = await updateComment(
+        initialCommentData.commentId,
+        commentContent
+      );
+      onCancleEditClick();
+    }
 
     if (result) {
       setCommentContent("");
@@ -200,18 +227,21 @@ const CommentEditor = ({
     setIsSubmitOngoing(false);
   };
 
+  const focusToCommentEditor = () =>
+    commentEditorRef.current?.focus();
+
   useEffect(() => {
-    if (isCommentEditorOpened && !isWatchingMd) {
+    if (focused) {
       focusToCommentEditor();
     }
-  }, [isCommentEditorOpened, isWatchingMd]);
+  }, [focused]);
 
   return (
     <>
       <Form
-        hidden={!isCommentEditorOpened}
         onClick={focusToCommentEditor}
         onSubmit={onFormSubmit}
+        hidden={hidden}
       >
         <EditorHeaderWrapper>
           <Username
@@ -250,21 +280,30 @@ const CommentEditor = ({
             </RenderedComment>
           )}
         </CommentEditorTextareaWrapper>
-        <ButtonCommentSubmit isDisabled={isSubmitOngoing}>
-          {isSubmitOngoing ? (
-            <LoadingIndicator isForSmall={true} />
-          ) : (
-            "등록하기!"
+        <EditButtonWrapper>
+          {initialCommentData && onCancleEditClick && (
+            <ButtonCommentSubmit
+              type="button"
+              isDisabled={false}
+              onClick={(
+                event: MouseEvent<HTMLButtonElement>
+              ) => {
+                onCancleEditClick();
+                event.stopPropagation();
+              }}
+            >
+              취소
+            </ButtonCommentSubmit>
           )}
-        </ButtonCommentSubmit>
+          <ButtonCommentSubmit isDisabled={isSubmitOngoing}>
+            {isSubmitOngoing ? (
+              <LoadingIndicator isForSmall={true} />
+            ) : (
+              "등록하기!"
+            )}
+          </ButtonCommentSubmit>
+        </EditButtonWrapper>
       </Form>
-      <ButtonCommentEditorOpener
-        type="button"
-        onClick={onCommentEditorOpenerClick}
-        hidden={isCommentEditorOpened}
-      >
-        댓글을 입력해주세요
-      </ButtonCommentEditorOpener>
     </>
   );
 };
