@@ -37,110 +37,89 @@ const AppRouter = () => {
       <Router>
         <Navbar />
         <Main>
-          <Routes>
-            <Route
-              path={ROUTE_PATH.HOME}
-              element={
-                <Suspense fallback={<LoadingIndicator />}>
-                  <HomePage />
-                </Suspense>
-              }
-            />
-            <Route path={ROUTE_PATH.PROFILE}>
+          <Suspense fallback={<LoadingIndicator />}>
+            <Routes>
               <Route
-                path={ROUTE_PATH.MYPOSTS}
-                element={
-                  <CheckAuth>
-                    <Helmet>
-                      <title>Share it!: 내가 쓴 글</title>
-                    </Helmet>
-                    <Suspense
-                      fallback={<LoadingIndicator />}
-                    >
+                path={ROUTE_PATH.HOME}
+                element={<HomePage />}
+              />
+              <Route path={ROUTE_PATH.PROFILE}>
+                <Route
+                  path={ROUTE_PATH.MYPOSTS}
+                  element={
+                    <CheckAuth>
+                      <Helmet>
+                        <title>Share it!: 내가 쓴 글</title>
+                      </Helmet>
                       <MyPostsPage />
-                    </Suspense>
-                  </CheckAuth>
-                }
-              />
-              <Route
-                path=""
-                element={
-                  <CheckAuth>
-                    <Helmet>
-                      <title>Share it!: 프로필</title>
-                    </Helmet>
-                    <Suspense
-                      fallback={<LoadingIndicator />}
-                    >
+                    </CheckAuth>
+                  }
+                />
+                <Route
+                  path=""
+                  element={
+                    <CheckAuth>
+                      <Helmet>
+                        <title>Share it!: 프로필</title>
+                      </Helmet>
+
                       <ProfilePage />
-                    </Suspense>
-                  </CheckAuth>
-                }
-              />
-              <Route
-                path="*"
-                element={<Navigate to="/" replace />}
-              />
-            </Route>
-            <Route path={ROUTE_PATH.POST}>
-              <Route
-                path={ROUTE_PATH.NEWPOST}
-                element={
-                  <CheckAuth>
-                    <Helmet>
-                      <title>Share it!: 포스트 작성</title>
-                    </Helmet>
-                    <Suspense
-                      fallback={<LoadingIndicator />}
-                    >
+                    </CheckAuth>
+                  }
+                />
+                <Route
+                  path="*"
+                  element={<Navigate to="/" replace />}
+                />
+              </Route>
+              <Route path={ROUTE_PATH.POST}>
+                <Route
+                  path={ROUTE_PATH.NEWPOST}
+                  element={
+                    <CheckAuth>
+                      <Helmet>
+                        <title>
+                          Share it!: 포스트 작성
+                        </title>
+                      </Helmet>
                       <PostNewPage />
-                    </Suspense>
-                  </CheckAuth>
-                }
-              />
-              <Route
-                path={ROUTE_PATH.EDIT}
-                element={
-                  <CheckAuth>
-                    <Suspense
-                      fallback={<LoadingIndicator />}
-                    >
+                    </CheckAuth>
+                  }
+                />
+                <Route
+                  path={ROUTE_PATH.EDIT}
+                  element={
+                    <CheckAuth>
                       <PostEditPage />
-                    </Suspense>
-                  </CheckAuth>
-                }
-              />
+                    </CheckAuth>
+                  }
+                />
+                <Route
+                  path=":postId"
+                  element={<PostByPostIdPage />}
+                />
+                <Route
+                  path="*"
+                  element={<Navigate to="/" replace />}
+                />
+              </Route>
               <Route
-                path=":postId"
+                path={ROUTE_PATH.AUTH}
                 element={
-                  <Suspense fallback={<LoadingIndicator />}>
-                    <PostByPostIdPage />
-                  </Suspense>
+                  <>
+                    <Helmet>
+                      <title>Share it!: 로그인</title>
+                    </Helmet>
+                    <LoginPage />
+                  </>
                 }
               />
               <Route
                 path="*"
                 element={<Navigate to="/" replace />}
               />
-            </Route>
-            <Route
-              path={ROUTE_PATH.AUTH}
-              element={
-                <>
-                  <Helmet>
-                    <title>Share it!: 로그인</title>
-                  </Helmet>
-                  <Suspense fallback={<LoadingIndicator />}>
-                    <LoginPage />
-                  </Suspense>
-                </>
-              }
-            />
-            <Route
-              path="*"
-              element={<Navigate to="/" replace />}
-            />
-          </Routes>
+            </Routes>
+          </Suspense>
         </Main>
         <Footer />
       </Router>
