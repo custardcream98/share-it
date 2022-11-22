@@ -10,6 +10,8 @@ import { ROUTE_PATH } from "configs/router.config";
 import useCurrentUser from "hooks/useCurrentUser";
 import usePostData from "hooks/usePostData";
 
+import "styles/D2Coding.css";
+
 const PostEditPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();

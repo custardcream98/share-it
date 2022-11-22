@@ -7,6 +7,8 @@ import PostTitle from "routes/Post/[postId]/components/PostTitle";
 import PostComments from "routes/Post/[postId]/components/PostComments";
 import LoadingIndicator from "components/common/LoadingIndicator";
 
+import "styles/D2Coding.css";
+
 const PostByPostIdPage = () => {
   const { postId } = useParams();
   const postData = usePostData(postId);

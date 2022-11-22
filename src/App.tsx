@@ -10,6 +10,8 @@ import AppRouter from "routes";
 import { cssMaxWidth } from "styles/css";
 import { lightTheme } from "styles/theme";
 
+import "public/styles/pretendard-subset.css";
+
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
@@ -56,13 +58,6 @@ const GlobalStyle = createGlobalStyle`
     * {
       box-sizing: border-box;
     }
-  }
-
-  @font-face {
-    font-family: 'D2Coding';
-    src: local('D2Coding'), url(./public/fonts/D2Coding.woff) format('woff');
-    font-style: normal;
-    font-weight: 400;
   }
 `;
 

@@ -7,6 +7,7 @@ import useCommentsData from "hooks/useCommentsData";
 import useCurrentUser from "hooks/useCurrentUser";
 
 import SpeechBalloonImg from "public/imgs/speech-balloon.png";
+import "styles/D2Coding.css";
 
 const Wrapper = styled.section`
   margin-top: 30px;
