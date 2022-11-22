@@ -13,8 +13,8 @@ export const cssLinkStyle = css`
   position: relative;
   color: ${(props) => props.theme.accentColor};
   transition: linear 0.3s;
-  -webkit-transition: linear 0.3s;
-  -moz-transition: linear 0.3s;
+
+  margin-left: 0.3rem;
   z-index: 10;
   &:hover {
     text-decoration: none;
@@ -24,8 +24,8 @@ export const cssLinkStyle = css`
     content: " ";
     position: absolute;
     width: calc(100% + 0.6rem);
-    height: calc(100% + 0.3rem);
-    top: -0.1rem;
+    height: calc(100% + 0.6rem);
+    top: -0.3rem;
     left: -0.3rem;
     border-radius: 4px;
     background-color: transparent;

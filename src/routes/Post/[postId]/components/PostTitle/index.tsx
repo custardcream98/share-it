@@ -25,7 +25,7 @@ const EditNav = styled.nav`
   margin-bottom: 10px;
   text-align: right;
   > button + a {
-    margin-left: 15px;
+    margin-left: 12px;
   }
 
   @media (max-width: ${MOBILE_BREAK_POINT}) {

@@ -36,8 +36,16 @@ const CodeblockCustomStyle = styled(SyntaxHighlighter)`
   font-size: 1rem !important;
   font-family: D2Coding, "D2 coding", monospace !important;
 
+  > code {
+    padding-left: 0 !important;
+  }
+
+  padding-left: 22px !important;
+
   @media (max-width: ${MOBILE_BREAK_POINT}) {
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
+
+    padding: 14px !important;
   }
 `;
 

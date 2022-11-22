@@ -11,7 +11,7 @@ export default css<Props>`
   --main-heading-margin: ${({ isForComment }) =>
     isForComment ? "0.8rem" : "1rem"};
   @media (max-width: ${MOBILE_BREAK_POINT}) {
-    --main-font-size: 0.9rem;
+    --main-font-size: 0.95rem;
   }
 
   -ms-text-size-adjust: 100%;
