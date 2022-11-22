@@ -35,9 +35,6 @@ const AppRouter = () => {
   return (
     <>
       <Router>
-        <Helmet>
-          <title>Share it!: 멋사 FE 3기의 코드나누기</title>
-        </Helmet>
         <Navbar />
         <Main>
           <Routes>
