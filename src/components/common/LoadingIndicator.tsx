@@ -28,6 +28,7 @@ const LoadingIndicatorStyle = styled.div<LoadingIndicatorStyleProps>`
   margin: 8px;
   border-radius: 50%;
 
+  transform: translate(-50%, -50%);
   animation: lds-dual-ring 1.2s linear infinite;
 
   ${({ isForSmall }) =>
