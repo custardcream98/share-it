@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import { cssMaxWidth } from "styles/css";
 import StyledLink from "components/common/StyledLink";
 import Logo from "components/common/Logo";
 import { navbarHeight } from "styles/styleConstants";
 import useAuth from "hooks/useAuth";
-import { Link } from "react-router-dom";
 import { ROUTE_PATH } from "configs/router.config";
 
 const Header = styled.header`

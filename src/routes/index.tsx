@@ -7,24 +7,29 @@ import {
 import styled from "styled-components";
 import { Helmet } from "react-helmet-async";
 
-import HomePage from "./Home";
-import ProfilePage from "./Profile";
-import PostNewPage from "./Post/New";
-import LoginPage from "./Auth";
-import PostByPostIdPage from "./Post/[postId]";
-import PostEditPage from "./Post/Edit";
-import MyPostsPage from "./Profile/Myposts";
 import CheckAuth from "routes/CheckAuth";
 
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import { navbarHeight } from "styles/styleConstants";
 import { ROUTE_PATH } from "configs/router.config";
+import { lazy, Suspense } from "react";
+import LoadingIndicator from "components/common/LoadingIndicator";
 
 const Main = styled.main`
   margin-top: calc(${navbarHeight} + 10px);
   flex-grow: 1;
 `;
+
+const HomePage = lazy(() => import("./Home"));
+const ProfilePage = lazy(() => import("./Profile"));
+const PostNewPage = lazy(() => import("./Post/New"));
+const LoginPage = lazy(() => import("./Auth"));
+const PostByPostIdPage = lazy(
+  () => import("./Post/[postId]")
+);
+const PostEditPage = lazy(() => import("./Post/Edit"));
+const MyPostsPage = lazy(() => import("./Profile/Myposts"));
 
 const AppRouter = () => {
   return (
@@ -38,7 +43,11 @@ const AppRouter = () => {
           <Routes>
             <Route
               path={ROUTE_PATH.HOME}
-              element={<HomePage />}
+              element={
+                <Suspense fallback={<LoadingIndicator />}>
+                  <HomePage />
+                </Suspense>
+              }
             />
             <Route path={ROUTE_PATH.PROFILE}>
               <Route
@@ -48,7 +57,11 @@ const AppRouter = () => {
                     <Helmet>
                       <title>Share it!: 내가 쓴 글</title>
                     </Helmet>
-                    <MyPostsPage />
+                    <Suspense
+                      fallback={<LoadingIndicator />}
+                    >
+                      <MyPostsPage />
+                    </Suspense>
                   </CheckAuth>
                 }
               />
@@ -59,7 +72,11 @@ const AppRouter = () => {
                     <Helmet>
                       <title>Share it!: 프로필</title>
                     </Helmet>
-                    <ProfilePage />
+                    <Suspense
+                      fallback={<LoadingIndicator />}
+                    >
+                      <ProfilePage />
+                    </Suspense>
                   </CheckAuth>
                 }
               />
@@ -76,7 +93,11 @@ const AppRouter = () => {
                     <Helmet>
                       <title>Share it!: 포스트 작성</title>
                     </Helmet>
-                    <PostNewPage />
+                    <Suspense
+                      fallback={<LoadingIndicator />}
+                    >
+                      <PostNewPage />
+                    </Suspense>
                   </CheckAuth>
                 }
               />
@@ -84,13 +105,21 @@ const AppRouter = () => {
                 path={ROUTE_PATH.EDIT}
                 element={
                   <CheckAuth>
-                    <PostEditPage />
+                    <Suspense
+                      fallback={<LoadingIndicator />}
+                    >
+                      <PostEditPage />
+                    </Suspense>
                   </CheckAuth>
                 }
               />
               <Route
                 path=":postId"
-                element={<PostByPostIdPage />}
+                element={
+                  <Suspense fallback={<LoadingIndicator />}>
+                    <PostByPostIdPage />
+                  </Suspense>
+                }
               />
               <Route
                 path="*"
@@ -104,7 +133,9 @@ const AppRouter = () => {
                   <Helmet>
                     <title>Share it!: 로그인</title>
                   </Helmet>
-                  <LoginPage />
+                  <Suspense fallback={<LoadingIndicator />}>
+                    <LoginPage />
+                  </Suspense>
                 </>
               }
             />
