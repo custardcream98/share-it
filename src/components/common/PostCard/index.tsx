@@ -35,7 +35,7 @@ const PostCardLink = styled(Link)<PostCardLinkProps>`
   }
 `;
 
-const Title = styled.h2`
+const Title = styled.h3`
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 10px;

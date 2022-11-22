@@ -181,94 +181,100 @@ const CommentCard = ({
   return (
     <>
       <Wrapper isLastCard={isLastCard}>
-        <div hidden={isEditingComment}>
-          <UsernameWrapper>
-            <Username
-              username={commentData.username}
-              profilePhotoURL={commentData.profilePhotoURL}
-              createdAt={commentData.createdAt}
-              editedAt={commentData.editedAt}
-            />
-            {commentData.uid === auth?.currentUser?.uid && (
-              <div className="edit-comment-wrapper">
-                <StyledLink
-                  as="button"
-                  type="button"
-                  onClick={onDeleteCommentClick}
-                >
-                  삭제
-                </StyledLink>
-                <StyledLink
-                  as="button"
-                  type="button"
-                  onClick={onEditCommentClick}
-                >
-                  수정
-                </StyledLink>
-              </div>
-            )}
-          </UsernameWrapper>
-          <CommentRenderer>
-            {commentData.content}
-          </CommentRenderer>
-        </div>
-        {commentData.uid === auth?.currentUser?.uid && (
-          <Form
-            hidden={!isEditingComment}
-            onSubmit={onFormSubmit}
-          >
-            <EditorHeaderWrapper>
+        {!isEditingComment && (
+          <>
+            <UsernameWrapper>
               <Username
                 username={commentData.username}
                 profilePhotoURL={
                   commentData.profilePhotoURL
                 }
+                createdAt={commentData.createdAt}
+                editedAt={commentData.editedAt}
               />
-              <ButtonGlanceMarkdown
-                isWatchingMd={isWatchingMd}
-                toggleMarkdownWatchingState={
-                  toggleMarkdownWatchigState
-                }
-              />
-            </EditorHeaderWrapper>
-            <label className="sr-only" htmlFor="comment">
-              댓글 입력란
-            </label>
-            <TextareaCommentEditor
-              id="comment"
-              ref={commentEditorRef}
-              spellCheck={false}
-              placeholder="댓글을 입력해주세요. 댓글에서도 마크다운 문법을 사용할 수 있습니다. 변환 결과를 보려면 오른쪽 위 마크다운 아이콘을 클릭해주세요."
-              hidden={isWatchingMd}
-              value={commentContent}
-              onChange={onCommentTextareaChange}
-              required
-            />
-            {isWatchingMd && (
-              <RenderedComment isForComment={true}>
-                {commentContent ?? ""}
-              </RenderedComment>
-            )}
-            <EditButtonWrapper>
-              <ButtonCommentSubmit
-                isDisabled={false}
-                type="button"
-                onClick={onCancleEditClick}
-              >
-                취소
-              </ButtonCommentSubmit>
-              <ButtonCommentSubmit
-                isDisabled={isSubmitOngoing}
-              >
-                {isSubmitOngoing ? (
-                  <LoadingIndicator isForSmall={true} />
-                ) : (
-                  "수정하기!"
-                )}
-              </ButtonCommentSubmit>
-            </EditButtonWrapper>
-          </Form>
+              {commentData.uid ===
+                auth?.currentUser?.uid && (
+                <div className="edit-comment-wrapper">
+                  <StyledLink
+                    as="button"
+                    type="button"
+                    onClick={onDeleteCommentClick}
+                  >
+                    삭제
+                  </StyledLink>
+                  <StyledLink
+                    as="button"
+                    type="button"
+                    onClick={onEditCommentClick}
+                  >
+                    수정
+                  </StyledLink>
+                </div>
+              )}
+            </UsernameWrapper>
+            <CommentRenderer>
+              {commentData.content}
+            </CommentRenderer>
+          </>
         )}
+        {commentData.uid === auth?.currentUser?.uid &&
+          isEditingComment && (
+            <Form onSubmit={onFormSubmit}>
+              <EditorHeaderWrapper>
+                <Username
+                  username={commentData.username}
+                  profilePhotoURL={
+                    commentData.profilePhotoURL
+                  }
+                />
+                <ButtonGlanceMarkdown
+                  isWatchingMd={isWatchingMd}
+                  toggleMarkdownWatchingState={
+                    toggleMarkdownWatchigState
+                  }
+                />
+              </EditorHeaderWrapper>
+              <label
+                className="sr-only"
+                htmlFor="edit-comment"
+              >
+                댓글 입력란
+              </label>
+              <TextareaCommentEditor
+                id="edit-comment"
+                ref={commentEditorRef}
+                spellCheck={false}
+                placeholder="댓글을 입력해주세요. 댓글에서도 마크다운 문법을 사용할 수 있습니다. 변환 결과를 보려면 오른쪽 위 마크다운 아이콘을 클릭해주세요."
+                hidden={isWatchingMd}
+                value={commentContent}
+                onChange={onCommentTextareaChange}
+                required
+              />
+              {isWatchingMd && (
+                <RenderedComment isForComment={true}>
+                  {commentContent ?? ""}
+                </RenderedComment>
+              )}
+              <EditButtonWrapper>
+                <ButtonCommentSubmit
+                  isDisabled={false}
+                  type="button"
+                  onClick={onCancleEditClick}
+                >
+                  취소
+                </ButtonCommentSubmit>
+                <ButtonCommentSubmit
+                  isDisabled={isSubmitOngoing}
+                >
+                  {isSubmitOngoing ? (
+                    <LoadingIndicator isForSmall={true} />
+                  ) : (
+                    "수정하기!"
+                  )}
+                </ButtonCommentSubmit>
+              </EditButtonWrapper>
+            </Form>
+          )}
       </Wrapper>
     </>
   );

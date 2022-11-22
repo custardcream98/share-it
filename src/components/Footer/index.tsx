@@ -19,7 +19,7 @@ const Container = styled.footer`
     display: flex;
   }
   address ul li {
-    color: ${(props) => props.theme.borderColor};
+    color: ${(props) => props.theme.darkerSubTextColor};
     font-size: inherit;
     font-weight: inherit;
     padding-left: 0.3rem;
@@ -28,7 +28,7 @@ const Container = styled.footer`
     padding-left: 0rem;
   }
   small {
-    color: ${(props) => props.theme.borderColor};
+    color: ${(props) => props.theme.darkerSubTextColor};
     margin-bottom: 0.4rem;
   }
 `;

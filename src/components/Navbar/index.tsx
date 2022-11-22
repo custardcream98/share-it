@@ -46,21 +46,25 @@ const Navbar = () => {
   return (
     <Header>
       <GlobalNavbar>
-        <Logo />
+        <h1>
+          <Logo />
+        </h1>
         <ul>
-          {auth ? (
-            <Link to={ROUTE_PATH.PROFILE}>
-              <ProfilePhoto
-                // eslint-disable-next-line
-                src={auth.currentUser!.photoURL!}
-                alt="프로필"
-              />
-            </Link>
-          ) : (
-            <StyledLink to={ROUTE_PATH.AUTH}>
-              로그인
-            </StyledLink>
-          )}
+          <li>
+            {auth ? (
+              <Link to={ROUTE_PATH.PROFILE}>
+                <ProfilePhoto
+                  // eslint-disable-next-line
+                  src={auth.currentUser!.photoURL!}
+                  alt="프로필"
+                />
+              </Link>
+            ) : (
+              <StyledLink to={ROUTE_PATH.AUTH}>
+                로그인
+              </StyledLink>
+            )}
+          </li>
         </ul>
       </GlobalNavbar>
     </Header>

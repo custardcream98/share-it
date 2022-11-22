@@ -17,7 +17,9 @@ const CategoryBadge = ({
   const [categoryString, iconUrl] = categories[categoryKey];
 
   return (
-    <EmBadge iconUrl={iconUrl}>{categoryString}</EmBadge>
+    <li>
+      <EmBadge iconUrl={iconUrl}>{categoryString}</EmBadge>
+    </li>
   );
 };
 

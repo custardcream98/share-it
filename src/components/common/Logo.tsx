@@ -32,7 +32,7 @@ const Logo = () => {
   return (
     <HeadingLogo to={"/"}>
       Share it!
-      <LogoImg src={LogoImgSrc} />
+      <LogoImg src={LogoImgSrc} alt="로고" />
     </HeadingLogo>
   );
 };
