@@ -49,7 +49,7 @@ const PostsList = ({ posts }: Props) => {
         {posts.map((post, i) => (
           <li key={post.uid + post.createdAt}>
             <PostCardLink
-              to={`${ROUTE_PATH.POST}/${post.postId}`}
+              to={`/${ROUTE_PATH.POST}/${post.postId}`}
               isLastCard={i === posts.length - 1}
             >
               <PostCard post={post} />
