@@ -8,15 +8,16 @@ import useCurrentUser from "hooks/useCurrentUser";
 
 import SpeechBalloonImg from "public/imgs/speech-balloon.png";
 import "styles/D2Coding.css";
+import { MOBILE_BREAK_POINT } from "styles/styleConstants";
 
 const Wrapper = styled.section`
   margin-top: 30px;
-  padding-top: 20px;
   border-top: 2px solid ${({ theme }) => theme.borderColor};
 
   h2 {
-    padding-left: 25px;
+    margin-top: 20px;
     margin-bottom: 20px;
+    padding-left: 25px;
 
     font-size: 1.3rem;
     font-weight: 600;
@@ -25,13 +26,21 @@ const Wrapper = styled.section`
       center/20px;
 
     @media (max-width: 800px) {
-      font-size: 1.15rem;
+      font-size: 1rem;
+      background-size: 18px;
+      padding-left: 22px;
+      margin-top: 15px;
+      margin-bottom: 15px;
     }
   }
 `;
 
 const ListComments = styled.ol`
   margin-top: 20px;
+
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    margin-top: 15px;
+  }
 `;
 
 type Props = {

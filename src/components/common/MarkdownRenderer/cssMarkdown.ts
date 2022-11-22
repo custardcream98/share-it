@@ -1,5 +1,6 @@
 import { css } from "styled-components";
 import { cssLinkStyle } from "styles/css";
+import { MOBILE_BREAK_POINT } from "styles/styleConstants";
 
 type Props = {
   isForComment: boolean;
@@ -9,8 +10,8 @@ export default css<Props>`
     isForComment ? "1rem" : "1.1rem"};
   --main-heading-margin: ${({ isForComment }) =>
     isForComment ? "0.8rem" : "1rem"};
-  @media (max-width: 800px) {
-    --main-font-size: 0.95rem;
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    --main-font-size: 0.9rem;
   }
 
   -ms-text-size-adjust: 100%;

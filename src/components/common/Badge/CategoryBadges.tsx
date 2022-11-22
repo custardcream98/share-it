@@ -5,7 +5,12 @@ const CategoryBadgeWrapper = styled.ul`
   display: inline-flex;
   gap: 5px;
 
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+
+  em {
+    white-space: nowrap;
+  }
 `;
 
 type Props = {

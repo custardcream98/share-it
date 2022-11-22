@@ -1,5 +1,8 @@
 import { css } from "styled-components";
-import { maxWidth } from "./styleConstants";
+import {
+  maxWidth,
+  MOBILE_BREAK_POINT,
+} from "./styleConstants";
 
 export const cssMaxWidth = css`
   width: min(${maxWidth}, calc(100% - 30px));
@@ -34,6 +37,10 @@ export const cssLinkStyle = css`
   &:hover::before {
     background-color: ${(props) => props.theme.accentColor};
   }
+
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    font-size: 0.9rem;
+  }
 `;
 
 export type CategoryBadgeProps = {
@@ -52,4 +59,11 @@ export const cssCategoryBadgeNotColored = css<CategoryBadgeProps>`
 
   background: url(${(props) => props.iconUrl}) no-repeat 6px
     center/18px 18px;
+
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    padding: 5px;
+    padding-left: 20px;
+    font-size: 0.7rem;
+    background-size: 12px 12px;
+  }
 `;

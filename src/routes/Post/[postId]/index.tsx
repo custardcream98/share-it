@@ -27,16 +27,10 @@ const PostByPostIdPage = () => {
       </Helmet>
       <section>
         <PostTitle
-          title={postData.title}
-          username={postData.username}
-          createdAt={postData.createdAt}
-          editedAt={postData.editedAt}
-          profilePhotoURL={postData.profilePhotoURL}
-          categories={postData.category}
-          commentsCount={postData.comments.length}
-          likes={postData.likes}
-          postId={postId}
-          authorUid={postData.uid}
+          post={{
+            ...postData,
+            postId,
+          }}
         />
         <MarkdownRenderer>
           {postData.content}

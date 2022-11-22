@@ -12,6 +12,7 @@ import bash from "react-syntax-highlighter/dist/cjs/languages/prism/bash";
 import markdown from "react-syntax-highlighter/dist/cjs/languages/prism/markdown";
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
 import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
+import { MOBILE_BREAK_POINT } from "styles/styleConstants";
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage(
@@ -34,6 +35,10 @@ SyntaxHighlighter.registerLanguage("json", json);
 const CodeblockCustomStyle = styled(SyntaxHighlighter)`
   font-size: 1rem !important;
   font-family: D2Coding, "D2 coding", monospace !important;
+
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    font-size: 0.9rem;
+  }
 `;
 
 const codeBlockHighlighter = ({

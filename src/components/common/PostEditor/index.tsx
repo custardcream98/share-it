@@ -11,7 +11,10 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import MarkdownRenderer from "components/common/MarkdownRenderer";
-import { navbarHeight } from "styles/styleConstants";
+import {
+  MOBILE_BREAK_POINT,
+  navbarHeight,
+} from "styles/styleConstants";
 import { ROUTE_PATH } from "configs/router.config";
 import useCreateContentMetaData from "hooks/useCreateContentMetaData";
 import { Post, PostWithPostId } from "interfaces";
@@ -26,14 +29,12 @@ import LoadingIndicator from "../LoadingIndicator";
 import { ButtonForDisableable } from "../Buttons/Button";
 import ButtonGlanceMarkdown from "../Buttons/ButtonGlanceMarkdown";
 
-const BREAK_POINT = "600px";
-
 const TextEditorWrapper = styled.div`
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
 
-  @media (max-width: ${BREAK_POINT}) {
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
     margin-top: 0px;
   }
 `;
@@ -47,7 +48,7 @@ const StyledRenderer = styled(MarkdownRenderer)<StyleProps>`
   height: calc(87vh - ${navbarHeight});
   overflow: auto;
 
-  @media (max-width: ${BREAK_POINT}) {
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
     visibility: ${({ isWatchingMd }) =>
       isWatchingMd ? "visible" : "hidden"};
     width: ${({ isWatchingMd }) =>
@@ -74,7 +75,7 @@ const TextareaEditor = styled.textarea<StyleProps>`
   font-size: 1.1rem;
   line-height: 1.5;
 
-  @media (max-width: ${BREAK_POINT}) {
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
     visibility: ${({ isWatchingMd }) =>
       isWatchingMd ? "hidden" : "visible"};
     width: ${({ isWatchingMd }) =>
@@ -87,7 +88,7 @@ const ButtonGlanceMarkdownForEditor = styled(
 )`
   visibility: hidden;
   height: 0;
-  @media (max-width: ${BREAK_POINT}) {
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
     visibility: visible;
     height: 32px;
   }

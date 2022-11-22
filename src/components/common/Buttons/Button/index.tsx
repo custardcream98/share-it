@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MOBILE_BREAK_POINT } from "styles/styleConstants";
 
 const Button = styled.button`
   display: inline-block;
@@ -15,9 +16,9 @@ const Button = styled.button`
     scale: 1.1;
   }
 
-  @media (max-width: 800px) {
-    padding: 4px 9px;
-    font-size: 0.8rem;
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    padding: 7px 9px;
+    font-size: 0.9rem;
   }
 `;
 

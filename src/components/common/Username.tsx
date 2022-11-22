@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MOBILE_BREAK_POINT } from "styles/styleConstants";
 import TimeIndicator from "./TimeIndicator";
 
 type UsernameStyledProps = {
@@ -28,6 +29,18 @@ const UsernameStyled = styled.span<UsernameStyledProps>`
 
     background: url(${(props) => props.profilePhotoURL})
       no-repeat center/cover;
+  }
+
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    height: 28px;
+    padding-left: 32px;
+    font-size: 0.7rem;
+    ::before {
+      width: 24px;
+      height: 24px;
+      border: 1px solid
+        ${(props) => props.theme.borderColor};
+    }
   }
 `;
 

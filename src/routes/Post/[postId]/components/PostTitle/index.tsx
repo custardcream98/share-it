@@ -4,13 +4,14 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-import Counter from "components/common/Counter";
-import Username from "components/common/Username";
+import StyledLink from "components/common/StyledLink";
+import PostCard from "components/common/PostsList/PostCard";
+
 import useCurrentUser from "hooks/useCurrentUser";
 import { deletePost } from "utils/firebase/posts";
 import { ROUTE_PATH } from "configs/router.config";
-import CategoryBadges from "components/common/Badge/CategoryBadges";
-import StyledLink from "components/common/StyledLink";
+import { MOBILE_BREAK_POINT } from "styles/styleConstants";
+import { PostWithPostId } from "interfaces";
 
 const Wrapper = styled.header`
   position: relative;
@@ -26,71 +27,32 @@ const EditNav = styled.nav`
   > button + a {
     margin-left: 15px;
   }
-`;
 
-const Title = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-`;
-
-const PostInfoWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-
-  @media (max-width: 500px) {
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 10px;
-
-    > ul + div {
-      align-self: flex-end;
-    }
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    margin-bottom: 5px;
   }
 `;
 
 type Props = {
-  title: string;
-  createdAt: number;
-  editedAt: number;
-  username: string;
-  profilePhotoURL: string;
-  categories: string[];
-  commentsCount: number;
-  likes: string[];
-  postId: string;
-  authorUid: string;
+  post: PostWithPostId;
 };
 
-const PostTitle = ({
-  title,
-  createdAt,
-  editedAt,
-  username,
-  profilePhotoURL,
-  categories,
-  commentsCount,
-  likes,
-  postId,
-  authorUid,
-}: Props) => {
+const PostTitle = ({ post }: Props) => {
   const { uid } = useCurrentUser(false);
   const navigate = useNavigate();
 
   const onDeletePostClick = async () => {
-    if (uid !== authorUid) {
+    if (uid !== post.uid) {
       throw Error("잘못된 접근입니다.");
     }
 
-    await deletePost(postId);
+    await deletePost(post.postId);
     navigate(ROUTE_PATH.HOME);
   };
 
   return (
     <Wrapper>
-      {uid === authorUid && (
+      {uid === post.uid && (
         <EditNav>
           <StyledLink
             as="button"
@@ -102,32 +64,14 @@ const PostTitle = ({
           <StyledLink
             to={generatePath(
               `/${ROUTE_PATH.POST}/${ROUTE_PATH.EDIT}?postId=:postId`,
-              { postId }
+              { postId: post.postId }
             )}
           >
             수정하기
           </StyledLink>
         </EditNav>
       )}
-      <Title>{title}</Title>
-      <Username
-        username={username}
-        profilePhotoURL={profilePhotoURL}
-        createdAt={createdAt}
-        editedAt={editedAt}
-      />
-      <PostInfoWrapper>
-        <CategoryBadges
-          categories={categories}
-          postId={postId}
-        />
-        <Counter
-          commentsCount={commentsCount}
-          likes={likes}
-          isLikeClickable={true}
-          postId={postId}
-        />
-      </PostInfoWrapper>
+      <PostCard post={post} isForPostByIdPage={true} />
     </Wrapper>
   );
 };

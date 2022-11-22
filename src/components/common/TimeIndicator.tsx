@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MOBILE_BREAK_POINT } from "styles/styleConstants";
 import getDateStringFromTimestamp from "utils/getDateStringFromTimestamp";
 
 const Time = styled.time`
@@ -6,6 +7,10 @@ const Time = styled.time`
   margin-top: 6px;
   font-size: 0.7rem;
   white-space: nowrap;
+
+  @media (max-width: ${MOBILE_BREAK_POINT}) {
+    font-size: 0.6rem;
+  }
 `;
 
 type Props = {
