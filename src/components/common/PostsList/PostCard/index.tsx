@@ -81,7 +81,7 @@ const PostCard = ({
         <Counter
           commentsCount={post.comments.length}
           likes={post.likes}
-          isLikeClickable={false}
+          isLikeClickable={isForPostByIdPage}
           postId={post.postId}
         />
       </PostInfoWrapper>

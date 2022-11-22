@@ -18,9 +18,6 @@ const cssLikeClickable = css<CounterStyleProps>`
   :hover {
     scale: 1.1;
   }
-
-  color: ${({ isLikeActive, theme }) =>
-    isLikeActive ? theme.accentColor : theme.textColor};
 `;
 
 const CounterWrapper = styled.div<CounterStyleProps>`
@@ -36,6 +33,8 @@ const CounterWrapper = styled.div<CounterStyleProps>`
   .like-count {
     background: url(${ThumbsUpImg}) no-repeat left
       center/18px;
+    color: ${({ isLikeActive, theme }) =>
+      isLikeActive ? theme.accentColor : theme.textColor};
     ${({ isLikeClickable }) =>
       isLikeClickable && cssLikeClickable};
   }
