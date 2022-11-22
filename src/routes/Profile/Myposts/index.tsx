@@ -1,4 +1,4 @@
-import ProfileTitle from "components/Profile/Title";
+import ProfileTitle from "routes/Profile/components/Title";
 import usePostsSnapshot from "hooks/usePostsSnapshot";
 import PostsList from "components/common/PostsList";
 import LoadingIndicator from "components/common/LoadingIndicator";

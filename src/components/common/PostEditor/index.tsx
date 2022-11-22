@@ -23,8 +23,8 @@ import {
 } from "utils/firebase/posts";
 import textareaDefalutDescription from "./textareaDefalutDescription";
 import LoadingIndicator from "../LoadingIndicator";
-import { ButtonForDisableable } from "../Button";
-import ButtonGlanceMarkdown from "../ButtonGlanceMarkdown";
+import { ButtonForDisableable } from "../Buttons/Button";
+import ButtonGlanceMarkdown from "../Buttons/ButtonGlanceMarkdown";
 
 const BREAK_POINT = "600px";
 

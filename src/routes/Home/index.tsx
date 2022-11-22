@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ROUTE_PATH } from "configs/router.config";
 import usePostsSnapshot from "hooks/usePostsSnapshot";
 
-import Button from "components/common/Button";
+import Button from "components/common/Buttons/Button";
 import LoadingIndicator from "components/common/LoadingIndicator";
 import PostsList from "components/common/PostsList";
 

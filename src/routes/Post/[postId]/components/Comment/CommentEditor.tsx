@@ -11,13 +11,13 @@ import { User } from "firebase/auth";
 
 import Username from "components/common/Username";
 import { ROUTE_PATH } from "configs/router.config";
-import { ButtonForDisableable } from "components/common/Button";
+import { ButtonForDisableable } from "components/common/Buttons/Button";
 import MarkdownRenderer from "components/common/MarkdownRenderer";
 import useCreateContentMetaData from "hooks/useCreateContentMetaData";
 import LoadingIndicator from "components/common/LoadingIndicator";
 import { Comment } from "interfaces";
 import { createComment } from "utils/firebase/comments";
-import ButtonGlanceMarkdown from "components/common/ButtonGlanceMarkdown";
+import ButtonGlanceMarkdown from "components/common/Buttons/ButtonGlanceMarkdown";
 
 const Form = styled.form`
   position: relative;

@@ -7,18 +7,19 @@ import {
 import styled from "styled-components";
 import { Helmet } from "react-helmet-async";
 
-import Navbar from "components/Navbar";
 import HomePage from "./Home";
 import ProfilePage from "./Profile";
-import { navbarHeight } from "styles/styleConstants";
 import PostNewPage from "./Post/New";
-import { ROUTE_PATH } from "configs/router.config";
 import LoginPage from "./Auth";
-import CheckAuth from "routes/CheckAuth";
 import PostByPostIdPage from "./Post/[postId]";
 import PostEditPage from "./Post/Edit";
-import Footer from "components/Footer";
 import MyPostsPage from "./Profile/Myposts";
+import CheckAuth from "routes/CheckAuth";
+
+import Navbar from "components/Navbar";
+import Footer from "components/Footer";
+import { navbarHeight } from "styles/styleConstants";
+import { ROUTE_PATH } from "configs/router.config";
 
 const Main = styled.main`
   margin-top: calc(${navbarHeight} + 10px);

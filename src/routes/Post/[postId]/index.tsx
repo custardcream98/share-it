@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 
 import usePostData from "hooks/usePostData";
 import MarkdownRenderer from "components/common/MarkdownRenderer";
-import PostTitle from "components/PostById/PostTitle";
+import PostTitle from "routes/Post/[postId]/components/PostTitle";
+import PostComments from "routes/Post/[postId]/components/PostComments";
 import LoadingIndicator from "components/common/LoadingIndicator";
-import PostComments from "components/PostById/PostComments";
 
 const PostByPostIdPage = () => {
   const { postId } = useParams();

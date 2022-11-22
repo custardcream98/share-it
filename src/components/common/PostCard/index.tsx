@@ -6,7 +6,7 @@ import { ROUTE_PATH } from "configs/router.config";
 
 import Username from "components/common/Username";
 import Counter from "components/common/Counter";
-import CategoryBadges from "components/common/CategoryBadges";
+import CategoryBadges from "components/common/Badge/CategoryBadges";
 
 type PostCardLinkProps = {
   isLastCard: boolean;

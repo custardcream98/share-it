@@ -9,7 +9,7 @@ import Username from "components/common/Username";
 import useCurrentUser from "hooks/useCurrentUser";
 import { deletePost } from "utils/firebase/posts";
 import { ROUTE_PATH } from "configs/router.config";
-import CategoryBadges from "components/common/CategoryBadges";
+import CategoryBadges from "components/common/Badge/CategoryBadges";
 import StyledLink from "components/common/StyledLink";
 
 const Wrapper = styled.header`

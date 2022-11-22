@@ -1,7 +1,8 @@
-import { ROUTE_PATH } from "configs/router.config";
-import useCurrentUser from "hooks/useCurrentUser";
 import { PropsWithChildren } from "react";
 import { useLocation, Navigate } from "react-router-dom";
+
+import { ROUTE_PATH } from "configs/router.config";
+import useCurrentUser from "hooks/useCurrentUser";
 
 const CheckAuth = ({ children }: PropsWithChildren) => {
   const location = useLocation();

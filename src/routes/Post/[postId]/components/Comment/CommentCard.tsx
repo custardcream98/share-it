@@ -8,17 +8,17 @@ import styled from "styled-components";
 
 import MarkdownRenderer from "components/common/MarkdownRenderer";
 import Username from "components/common/Username";
-import { CommentWithCommentId } from "interfaces";
+import StyledLink from "components/common/StyledLink";
+import ButtonGlanceMarkdown from "components/common/Buttons/ButtonGlanceMarkdown";
+import LoadingIndicator from "components/common/LoadingIndicator";
+import { ButtonForDisableable } from "components/common/Buttons/Button";
 
 import {
   deleteComment,
   updateComment,
 } from "utils/firebase/comments";
 import useAuth from "hooks/useAuth";
-import StyledLink from "components/common/StyledLink";
-import ButtonGlanceMarkdown from "components/common/ButtonGlanceMarkdown";
-import LoadingIndicator from "components/common/LoadingIndicator";
-import { ButtonForDisableable } from "components/common/Button";
+import { CommentWithCommentId } from "interfaces";
 
 type WrapperProps = {
   isLastCard: boolean;

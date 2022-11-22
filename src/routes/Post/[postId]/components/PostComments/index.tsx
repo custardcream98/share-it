@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 import LoadingIndicator from "components/common/LoadingIndicator";
+import CommentEditor from "../Comment/CommentEditor";
+import CommentCard from "routes/Post/[postId]/components/Comment/CommentCard";
 import useCommentsData from "hooks/useCommentsData";
 import useCurrentUser from "hooks/useCurrentUser";
 
 import SpeechBalloonImg from "public/imgs/speech-balloon.png";
-import CommentEditor from "./CommentEditor";
-import CommentCard from "./CommentCard";
 
 const Wrapper = styled.section`
   margin-top: 30px;

@@ -1,9 +1,11 @@
-import Button from "components/common/Button";
-import StyledLink from "components/common/StyledLink";
-import { fireAuth } from "configs/firebase.config";
-import { ROUTE_PATH } from "configs/router.config";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+import Button from "components/common/Buttons/Button";
+import StyledLink from "components/common/StyledLink";
+
+import { fireAuth } from "configs/firebase.config";
+import { ROUTE_PATH } from "configs/router.config";
 
 const Wrapper = styled.div`
   display: flex;
